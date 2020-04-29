@@ -47,6 +47,8 @@ def credit_crunch(converted_data):
     # import train data
     raw_data = pd.read_csv('datasets/Credit_Data_Raw.csv')
 
+    raw_data.dropna()
+
     # defining labels and input fields
     X = raw_data.drop('DEFAULT', axis=1)[[item for item in converted_data]]
     y = raw_data['DEFAULT'].reshape(-1, 1)
