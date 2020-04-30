@@ -27,15 +27,49 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("home.html")
+    return render_template("index.html")
+
+@app.route("/data_analysis.html")
+def data_analysis():
+    return render_template("data_analysis.html")
+
+@app.route("/about_us.html")
+def about_us():
+    return render_template("about_us.html")
+
+
+@app.route("/model_comparison.html")
+def model_comparison():
+    return render_template("model_comparison.html")
+
+
+@app.route("/neural_network_code.html")
+def neural_network_code():
+    return render_template("neural_network_code.html")
+
+
+@app.route("/neural_network.html")
+def neural_network():
+    return render_template("neural_network.html")
+
+@app.route("/random_forest_code.html")
+def random_forest_code():
+    return render_template("random_forest_code.html")
+
+
+@app.route("/random_forest.html")
+def random_forest():
+    return render_template("random_forest.html")
+
 
 
 
 ##### @TODO: input all directories
-# consider short & long forms
+# consider short & long form selection
 # consider outputting user data to PostgreSQL db and storing for evaluation on app in dashboard
 # (Model scores, user inputs, # of applications)
 # consider visual of how applicant compares to others
+
 
 
 
@@ -47,12 +81,15 @@ def index():
 def crunch():
 
     ### DEV TOOLS ###
-    field_list=['items']
+    field_list = ['CHK_ACCT', 'DURATION', 'HISTORY', 'NEW_CAR', 'USED_CAR', 'FURNITURE', 'RADIO_TV', 'EDUCATION', 'RETRAINING',
+    'AMOUNT', 'SAV_ACCT', 'EMPLOYMENT', 'INSTALL_RATE', 'MALE_DIV', 'MALE_SINGLE', 'MALE_MAR_or_WID', 'CO_APPLICANT', 'GUARANTOR', 
+    'PRESENT_RESIDENT', 'REAL_ESTATE', 'PROP_UNKN_NONE', 'AGE', 'OTHER_INSTALL', 'RENT', 'OWN_RES', 'NUM_CREDITS', 'JOB', 
+    'NUM_DEPENDENTS', 'TELEPHONE', 'FOREIGN']
 
 
     form_data = {}
 
-    '''@TODO: 
+    '''@TODO: input form actions and method
 
     # for inputs in html:
     <form action="{{ url_for('form_submit') }}" method="post">

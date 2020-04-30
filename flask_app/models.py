@@ -7,16 +7,18 @@ Creation Date: 2020-04-28
 
 
 
-def credit_crunch(converted_data):
+def credit_crunch(converted_data,  return_evaluation=False):
 # Credit Crunch is a TensorFlow Neural Network that predicts an applicant's probablity to default on a loan. 
 # If default is predicted, a loan denial is returned; otherwise, approved.
 # The NN model is dynamically created everytime to match in input data that is imported as a key:value dictionary.
+# return_evaluation should be a boolean value (true/false) on whether or not to return model evaluation metrics with function
 # Generic NN model parameters can be set in the DEV TOOLS.
 
 
     ### DEV TOOLS ###
+    return_model_evaluation = return_evaluation
     numpy_seed = 42
-    number_inputs = bundled_data.length()
+    number_inputs = len(converted_data)
     number_classes = 2
     number_hidden_layers = 2
     number_hidden_nodes = 100
@@ -26,8 +28,6 @@ def credit_crunch(converted_data):
     learn_metrics = ['accuracy']
     loss_type = 'categorical_crossentropy'
     optimizer_type = 'adam'
-
-
 
     # import dependencies
     import numpy as np
@@ -48,19 +48,22 @@ def credit_crunch(converted_data):
     raw_data = pd.read_csv('datasets/Credit_Data_Raw.csv')
 
     raw_data.dropna()
-
-    # defining labels and input fields
+    
+    # defining labels, input fields, and input form data
     X = raw_data.drop('DEFAULT', axis=1)[[item for item in converted_data]]
-    y = raw_data['DEFAULT'].reshape(-1, 1)
-
+    y = np.array(raw_data['DEFAULT']).reshape(-1, 1)
+    data_bundle = np.array(list([converted_data[item] for item in converted_data])).reshape(1, -1)
+    
     # spliting data to test and training sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-
+    
+    
     # scaling data 
     X_scaler = MinMaxScaler().fit(X_train)
     X_train_scaled = X_scaler.transform(X_train)
     X_test_scaled = X_scaler.transform(X_test)
-    data_bundle = X_scaler.transform(np.array(list([converted_data[item] for item in converted_data])))
+    data_bundle_scaled = X_scaler.transform(data_bundle)
+    
 
     # one-hot-encoding output labels
     label_encoder = LabelEncoder()
@@ -77,8 +80,8 @@ def credit_crunch(converted_data):
     model.add(Dense(units=number_hidden_nodes, activation=layer_activation, input_dim=number_inputs))
 
     # adding hidden layers
-    for layer in np.array(0, number_hidden_layers):
-        model.add(Dense(units=number_hidden_nodes, activation=layer_activation)
+    for layer in np.arange(0, number_hidden_layers):
+        model.add(Dense(units=number_hidden_nodes, activation=layer_activation))
 
     # adding classifier layer
     model.add(Dense(units=number_classes, activation=classifier_activation))
@@ -99,9 +102,13 @@ def credit_crunch(converted_data):
     # predicting approval for user
     crunchies = model.predict(data_bundle)
 
-    # @TODO: return model evaluation for dashboard?
-    # Model Evaluation
-    # model_loss, model_accuracy = default_model.evaluate(X_test_scaled, y_test_categorical, verbose=2)
 
+    # returning model evaluation if turned on
+    if return_model_evaluation:
+        model_loss, model_accuracy = model.evaluate(X_test_scaled, y_test_categorical, verbose=2)
 
-    return crunchies
+        return crunchies, model_loss, model_accuracy
+
+    else:
+
+        return crunchies
