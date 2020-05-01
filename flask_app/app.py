@@ -6,7 +6,7 @@ Creation Date: 2020-02-14
 
 # Import Dependencies
 from flask import Flask, render_template, request
-from models import credit_crunch
+from models import credit_crunch, approval_check
 
 
 ### DEV TOOLS ###
@@ -29,18 +29,20 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
 @app.route("/data_analysis.html")
 def data_analysis():
     return render_template("data_analysis.html")
 
-@app.route("/about_us.html")
-def about_us():
-    return render_template("about_us.html")
+
+@app.route("/neural_network.html")
+def neural_network():
+    return render_template("neural_network.html")
 
 
-@app.route("/model_comparison.html")
-def model_comparison():
-    return render_template("model_comparison.html")
+@app.route("/random_forest.html")
+def random_forest():
+    return render_template("random_forest.html")
 
 
 @app.route("/neural_network_code.html")
@@ -48,18 +50,19 @@ def neural_network_code():
     return render_template("neural_network_code.html")
 
 
-@app.route("/neural_network.html")
-def neural_network():
-    return render_template("neural_network.html")
-
 @app.route("/random_forest_code.html")
 def random_forest_code():
     return render_template("random_forest_code.html")
 
 
-@app.route("/random_forest.html")
-def random_forest():
-    return render_template("random_forest.html")
+@app.route("/model_comparison.html")
+def model_comparison():
+    return render_template("model_comparison.html")
+
+
+@app.route("/about_us.html")
+def about_us():
+    return render_template("about_us.html")
 
 
 
@@ -108,10 +111,15 @@ def crunch():
     converted_data = "some data stored a field:value dictionary"
     
 
-    # returning approval rating for user
-    crunchies = credit_crunch(converted_data)
+    # returning approval probability for user
+    crunchies, model_loss, model_accuracy = credit_crunch(converted_data)
 
-    return render_template("crunch_results.html", crunchies=crunchies)
+    # determining approval status based on model accuracy and approval probability
+    approval_status = approval_check(crunchies, model_accuracy)
+
+
+    return render_template("crunch_results.html", approval_status=approval_status)
+    # @TODO: add results modal to index.html; insert Cara's model into credit_crunch
 
 
 
