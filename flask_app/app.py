@@ -115,7 +115,7 @@ def crunch():
     crunchies, model_loss, model_accuracy = credit_crunch(converted_data)
 
     # determining approval status based on model accuracy and approval probability
-    approval_status = approval_check(crunchies, model_accuracy)
+    approval_status = approval_check(crunchies, model_accuracy, model_type)
 
 
     return render_template("crunch_results.html", approval_status=approval_status)
