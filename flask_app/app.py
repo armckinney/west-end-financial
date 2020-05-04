@@ -16,7 +16,7 @@ dev_mode = True
 
 
 # Flask App Setup
-app = Flask(__name__)
+app = Flask(__name__, static_folder='Images')
 
 
 
@@ -27,7 +27,7 @@ app = Flask(__name__)
 #################################################
 
 
-@app.route("/")
+@app.route("/index.html")
 def index():
     return render_template("index.html")
 
