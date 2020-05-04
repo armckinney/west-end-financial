@@ -5,8 +5,10 @@ Creation Date: 2020-02-14
 '''
 
 # Import Dependencies
-from flask import Flask, render_template, request
-from models import credit_crunch, approval_check
+from flask import Flask, render_template
+from models2 import credit_crunch, approval_check
+# credit_crunch, approval_check
+from data_packs import field_list, general_field_list, packed_field_list, basic_model_field_list, form_dict, unpacking, merge_dict
 
 
 ### DEV TOOLS ###
@@ -68,9 +70,7 @@ def about_us():
 
 
 ##### @TODO: input all directories
-# consider short & long form selection
-# consider outputting user data to PostgreSQL db and storing for evaluation on app in dashboard
-# (Model scores, user inputs, # of applications)
+# consider outputting user data to PostgreSQL db and storing for evaluation on app in dashboard (Model scores, user inputs, # of applications)
 # consider visual of how applicant compares to others
 
 
@@ -84,42 +84,44 @@ def about_us():
 def crunch():
 
     ### DEV TOOLS ###
-    field_list = ['CHK_ACCT', 'DURATION', 'HISTORY', 'NEW_CAR', 'USED_CAR', 'FURNITURE', 'RADIO_TV', 'EDUCATION', 'RETRAINING',
-    'AMOUNT', 'SAV_ACCT', 'EMPLOYMENT', 'INSTALL_RATE', 'MALE_DIV', 'MALE_SINGLE', 'MALE_MAR_or_WID', 'CO_APPLICANT', 'GUARANTOR', 
-    'PRESENT_RESIDENT', 'REAL_ESTATE', 'PROP_UNKN_NONE', 'AGE', 'OTHER_INSTALL', 'RENT', 'OWN_RES', 'NUM_CREDITS', 'JOB', 
-    'NUM_DEPENDENTS', 'TELEPHONE', 'FOREIGN']
 
 
-    form_data = {}
 
-    '''@TODO: input form actions and method
+    # @TODO:
+    # collecting standard items from form and making data dictionary if selection made
+    general_form_data = form_dict(general_field_list)
 
-    # for inputs in html:
-    <form action="{{ url_for('form_submit') }}" method="post">
-        <input type="text" name="projectFilepath">
-        <input type="submit">
-    </form>
+    # collecting packed items from form and making data dictionary if selection made
+    packed_form_data = form_dict(packed_field_list)
 
-    '''
-
-    # packing form_data from field list
-    for field in field_list:
-        form_data[field] = request.form[field]
-
-
-    # @TODO convert inputs to required format for TF (note can either call function to convert on request item or can loop through form_data to convert)
-    converted_data = "some data stored a field:value dictionary"
+    # unpack the packs
+    unpacked_form_data = unpacking(packed_form_data, packed_field_list)
     
-
-    # returning approval probability for user
-    crunchies, model_loss, model_accuracy = credit_crunch(converted_data)
-
-    # determining approval status based on model accuracy and approval probability
-    approval_status = approval_check(crunchies, model_accuracy, model_type)
+    # appending unpacked data to general form data and sorting to model requirements
+    data_package = merge_dict(field_list, general_form_data, unpacked_form_data)
 
 
-    return render_template("crunch_results.html", approval_status=approval_status)
-    # @TODO: add results modal to index.html; insert Cara's model into credit_crunch
+    # determining to use basic or dynamic model based on user inputs
+    if [item for item in data_package] == basic_model_field_list:
+        basic_model = True
+    else:
+        basic_model = False
+
+
+    return_evaluation = True
+
+    print(basic_model, len(data_package), data_package)
+
+    # # returning approval probability for user
+    crunchies, model_loss, model_accuracy = credit_crunch(data_package, return_evaluation, basic_model)
+
+    # # determining approval status based on model accuracy and approval probability
+    approval_status = approval_check(crunchies, model_accuracy)
+
+    print(approval_status, crunchies, model_accuracy)
+
+    # return render_template("crunch_results.html", approval_status=approval_status)
+    # @TODO: add results modal to index.html
 
 
 

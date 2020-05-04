@@ -64,9 +64,7 @@ def credit_crunch(data_package,  return_evaluation=False, basic_model=False):
     import pandas as pd
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-    from tensorflow.keras.utils import to_categorical
-    from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense
+    from tensorflow import keras
 
 
     # setting numpy seed for reproducible results
@@ -94,10 +92,8 @@ def credit_crunch(data_package,  return_evaluation=False, basic_model=False):
     
     # loading pre-defined model
     if basic_model:
-        
-        from tensorflow.keras.models import load_model
 
-        model = load_model("models/DEFAULT_model_trained_top_10.h5")
+        model = keras.models.load_model("models/DEFAULT_model_trained_top_10.h5")
         
         model_loss = 0.5177
         model_accuracy = 0.7680
@@ -117,22 +113,22 @@ def credit_crunch(data_package,  return_evaluation=False, basic_model=False):
         label_encoder.fit(y_train)
         encoded_y_train = label_encoder.transform(y_train)
         encoded_y_test = label_encoder.transform(y_test)
-        y_train_categorical = to_categorical(encoded_y_train)
-        y_test_categorical = to_categorical(encoded_y_test)
+        y_train_categorical = keras.utils.to_categorical(encoded_y_train)
+        y_test_categorical = keras.utils.to_categorical(encoded_y_test)
         
         
         # instantiating Neural Net Model
-        model = Sequential()
+        model = keras.models.Sequential()
 
         # adding input layer
-        model.add(Dense(units=number_hidden_nodes, activation=layer_activation, input_dim=number_inputs))
+        model.add(keras.layers.Dense(units=number_hidden_nodes, activation=layer_activation, input_dim=number_inputs))
 
         # adding hidden layers
         for layer in np.arange(0, number_hidden_layers):
-            model.add(Dense(units=number_hidden_nodes, activation=layer_activation))
+            model.add(keras.layers.Dense(units=number_hidden_nodes, activation=layer_activation))
 
         # adding classifier layer
-        model.add(Dense(units=number_classes, activation=classifier_activation))
+        model.add(keras.layers.Dense(units=number_classes, activation=classifier_activation))
 
         # compiling model
         model.compile(optimizer=optimizer_type, loss=loss_type, metrics=learn_metrics)
@@ -165,3 +161,9 @@ def credit_crunch(data_package,  return_evaluation=False, basic_model=False):
     
         return crunchies
     
+
+# test = {'CHK_ACCT': 0, 'DURATION': 45, 'HISTORY': 1, 'AMOUNT': 2000, 'SAV_ACCT': 0, 'EMPLOYMENT': 1, 'INSTALL_RATE': 2, 'MALE_DIV': 0, 'MALE_SINGLE': 0, 'MALE_MAR_or_WID': 1, 'CO_APPLICANT': 0, 'GUARANTOR': 0, 'PRESENT_RESIDENT': 0, 'REAL_ESTATE': 0, 'PROP_UNKN_NONE': 1, 'AGE': 32, 'OTHER_INSTALL': 1, 'RENT': 0, 'OWN_RES': 1, 'NUM_CREDITS': 3, 'JOB': 1, 'NUM_DEPENDENTS': 2, 'TELEPHONE': 1, 'FOREIGN': 0}
+
+# results = credit_crunch(test, False, False)
+
+# print(results)
