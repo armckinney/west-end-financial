@@ -115,23 +115,27 @@
         <hr class="my-4">
       </div>
       <div class="single-post-content">
-      Definition: A random forest is a meta estimator that fits numerous decision tree classifiers on various sub-samples of the dataset and uses averaging to improve the predictive accuracy and control over-fitting.<br>
+      <b>Definition:</b> A random forest is a meta estimator that fits numerous decision tree classifiers on various sub-samples of the dataset and uses averaging to improve the predictive accuracy and control over-fitting.<br>
       <br>
       <a class="link" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">(scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)</a>
       <br><br>
-      The Random Forest is ensemble method from SkLearn library, it shows how appropriated columns values to feature importance ratios.  So, each individual test has variable of conditions is based on a ratio importance that help determine the predicted result.  It is the based logic that outlines the mathematical process in the final decision and/or prediction.  The CliffsNotes of Machine Learning’s little black box.<br>
-      <br>
-      This Random Forest read in 31 Columns from the Credit DataOriginal.csv to classify.   The RandomForestClassifier from SkLearn fits the default.data (less the DEFAULT column) with  default.target ( just the DEFAULT column).<br> 
       </div>
-      <div class="image-wrapper float-left p-4">
+      <div class="image-wrapper float-left">
         <img src="../Images/Forest1_DF.png" alt="">
       </div>
       <div class="single-post-content-wrapper">
+      The Random Forest is ensemble method from SkLearn library, it shows how appropriated columns values to feature importance ratios.  So, each individual test has variable of conditions is based on a ratio importance that help determine the predicted result.<br>
+      <br>
+      It is the based logic that outlines the mathematical process in the final decision and/or prediction.  The CliffsNotes of Machine Learning’s little black box.<br>
+      <br>
+      This Random Forest read in 31 Columns from the Credit DataOriginal.csv to classify.  The RandomForestClassifier from SkLearn fits the default.data (less the DEFAULT column) with  default.target ( just the DEFAULT column).<br>       
+      <br>
       In order to analyze the list, a Data Frame was created displaying Feature Importance and the corresponding rating.<br>
       <br>
       Then, the iloc of the top ten was utilized while sorting by descending order.<br>
       <br>
       This returned the Top Ten Importance Features that were used to revise specific columns in a new data frame.  The 10 columns along with the DEFAULT column became the Credit_Data_Revised.cvs used in the Neural Network Model.<br>
+      <br>
       </div>
     </div>
     <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">
