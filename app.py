@@ -6,13 +6,12 @@ Creation Date: 2020-02-14
 
 # Import Dependencies
 from flask import Flask, render_template
-from models2 import credit_crunch, approval_check
-# credit_crunch, approval_check
+from models import credit_crunch, approval_check
 from data_packs import field_list, general_field_list, packed_field_list, basic_model_field_list, form_dict, unpacking, merge_dict
-
+from tensorflow import keras
 
 ### DEV TOOLS ###
-dev_mode = True
+dev_mode = False
 
 
 # Flask App Setup
@@ -67,24 +66,12 @@ def about_us():
     return render_template("about_us.html")
 
 
-
-
-##### @TODO: input all directories
-# consider outputting user data to PostgreSQL db and storing for evaluation on app in dashboard (Model scores, user inputs, # of applications)
-# consider visual of how applicant compares to others
-
-
-
-
-
-
-
 # crunching user input for approval
 @app.route("/form_submit", methods=['POST'])
 def crunch():
 
     ### DEV TOOLS ###
-
+    return_evaluation = True
 
 
     # @TODO:
@@ -108,20 +95,13 @@ def crunch():
         basic_model = False
 
 
-    return_evaluation = True
-
-    print(basic_model, len(data_package), data_package)
-
-    # # returning approval probability for user
+    # returning approval probability for user
     crunchies, model_loss, model_accuracy = credit_crunch(data_package, return_evaluation, basic_model)
 
-    # # determining approval status based on model accuracy and approval probability
+    # determining approval status based on model accuracy and approval probability
     approval_status = approval_check(crunchies, model_accuracy)
 
-    print(approval_status, crunchies, model_accuracy)
-
-    # return render_template("crunch_results.html", approval_status=approval_status)
-    # @TODO: add results modal to index.html
+    return render_template("credit_approval_results.html", approval_status=approval_status)
 
 
 

@@ -20,10 +20,10 @@ def approval_check(crunchies, model_accuracy):
     # 2nd value, [1], is default probability
     approval_probability = crunchies[0][0]
 
-        
+    # Determining Result based on model accuracy
     if model_accuracy > sufficient_accuracy:
         if approval_probability >= approved_probability:
-            return("Approval")
+            return('Approval')
         else:
             return('Declined')
 
@@ -64,9 +64,7 @@ def credit_crunch(data_package,  return_evaluation=False, basic_model=False):
     import pandas as pd
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-    from tensorflow.keras.utils import to_categorical
-    from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense
+    from tensorflow import keras
 
 
     # setting numpy seed for reproducible results
@@ -94,10 +92,8 @@ def credit_crunch(data_package,  return_evaluation=False, basic_model=False):
     
     # loading pre-defined model
     if basic_model:
-        
-        from tensorflow.keras.models import load_model
 
-        model = load_model("models/DEFAULT_model_trained_top_10.h5")
+        model = keras.models.load_model("models/DEFAULT_model_trained_top_10.h5")
         
         model_loss = 0.5177
         model_accuracy = 0.7680
@@ -117,22 +113,22 @@ def credit_crunch(data_package,  return_evaluation=False, basic_model=False):
         label_encoder.fit(y_train)
         encoded_y_train = label_encoder.transform(y_train)
         encoded_y_test = label_encoder.transform(y_test)
-        y_train_categorical = to_categorical(encoded_y_train)
-        y_test_categorical = to_categorical(encoded_y_test)
+        y_train_categorical = keras.utils.to_categorical(encoded_y_train)
+        y_test_categorical = keras.utils.to_categorical(encoded_y_test)
         
         
         # instantiating Neural Net Model
-        model = Sequential()
+        model = keras.models.Sequential()
 
         # adding input layer
-        model.add(Dense(units=number_hidden_nodes, activation=layer_activation, input_dim=number_inputs))
+        model.add(keras.layers.Dense(units=number_hidden_nodes, activation=layer_activation, input_dim=number_inputs))
 
         # adding hidden layers
         for layer in np.arange(0, number_hidden_layers):
-            model.add(Dense(units=number_hidden_nodes, activation=layer_activation))
+            model.add(keras.layers.Dense(units=number_hidden_nodes, activation=layer_activation))
 
         # adding classifier layer
-        model.add(Dense(units=number_classes, activation=classifier_activation))
+        model.add(keras.layers.Dense(units=number_classes, activation=classifier_activation))
 
         # compiling model
         model.compile(optimizer=optimizer_type, loss=loss_type, metrics=learn_metrics)
@@ -164,4 +160,3 @@ def credit_crunch(data_package,  return_evaluation=False, basic_model=False):
     else:
     
         return crunchies
-    
