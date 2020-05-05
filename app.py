@@ -26,6 +26,7 @@ app = Flask(__name__, static_folder='Images')
 #################################################
 
 
+@app.route("/")
 @app.route("/index.html")
 def index():
     return render_template("index.html")
@@ -54,6 +55,11 @@ def neural_network_code():
 @app.route("/random_forest_code.html")
 def random_forest_code():
     return render_template("random_forest_code.html")
+
+
+@app.route("/app_code.html")
+def app_code():
+    return render_template("app_code.html")
 
 
 @app.route("/model_comparison.html")

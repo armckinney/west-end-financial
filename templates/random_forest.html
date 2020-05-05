@@ -15,11 +15,7 @@
     .navbar-light .navbar-brand {
         color: rgba(113, 114, 114, 0.993)
     }
-    
-    /* .navbar-brand {
-        background-color: rgba(113, 114, 114, 0.993) ;
-    } */
-    
+     
     h1 {
         margin-bottom: 15px;
         font-family: Segoe UI;
@@ -86,10 +82,11 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Machine Learning Code</a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Project Code</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="neural_network_code.html">Neural Network</a>
             <a class="dropdown-item" href="random_forest_code.html">Random Forest</a>
+            <a class="dropdown-item" href="app_code.html">Credit Approval App</a>
           </div>
         </li>
         <li class="nav-item">
@@ -111,7 +108,7 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col-lg-5 col-sm-12 col-xs-12 padding p2">
+    <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">
       <br>
       <h2>Top 10 Most Important Features</h2>
       <div>
@@ -126,7 +123,6 @@
       <br>
       This Random Forest read in 31 Columns from the Credit DataOriginal.csv to classify.   The RandomForestClassifier from SkLearn fits the default.data (less the DEFAULT column) with  default.target ( just the DEFAULT column).<br> 
       </div>
-      <br>
       <div class="image-wrapper float-left p-4">
         <img src="../Images/Forest1_DF.png" alt="">
       </div>
@@ -138,8 +134,7 @@
       This returned the Top Ten Importance Features that were used to revise specific columns in a new data frame.  The 10 columns along with the DEFAULT column became the Credit_Data_Revised.cvs used in the Neural Network Model.<br>
       </div>
     </div>
-    <div class="col-lg-5 col-sm-12 col-xs-12 padding p2">
-      <br>   
+    <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">
       <h2>Prediction Importance Feature and Acending Ratings</h2>
       <div>
         <hr class="my-4">
@@ -155,9 +150,6 @@
       By sorting the feature importance in descending order, the highest feature rating lists 1–30.<br>
       </div>
       <br>
-      <div class="image-wrapper float-left pr-4">
-        <img src="../Images/Forest4_Graphic.png" alt="">
-      </div>
     </div>
   </div>
   </div>

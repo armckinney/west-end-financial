@@ -11,43 +11,44 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js"></script>
+  
   <style>
     .navbar-light .navbar-brand {
-        color: rgba(113, 114, 114, 0.993)
+      color: rgba(113, 114, 114, 0.993)
     }
     
     /* .navbar-brand {
-        background-color: rgba(113, 114, 114, 0.993) ;
+      background-color: rgba(113, 114, 114, 0.993) ;
     } */
     
     h1 {
-        margin-bottom: 15px;
-        font-family: Segoe UI;
-        font-weight: normal;
-        color:rgba(113, 114, 114, 0.993);
+      margin-bottom: 15px;
+      font-family: Segoe UI;
+      font-weight: normal;
+      color:rgba(113, 114, 114, 0.993);
     }
     h2 {
-        margin-bottom: 15px;
-        font-family: Segoe UI;
-        font-weight: normal;
-        color:rgba(113, 114, 114, 0.993);
+      margin-bottom: 15px;
+      font-family: Segoe UI;
+      font-weight: normal;
+      color:rgba(113, 114, 114, 0.993);
     }
     body {
-        background-color: white;
+      background-color: white;
     }
     media-body { 
-        height:relative;
-        width:relative;
-        border:1px solid whitesmoke;
-        overflow:auto;
-        position: relative;
-        font-family: Arial;
-        left:350px;
-        top:16px;
-        background-color:whitesmoke;
+      height:relative;
+      width:relative;
+      border:1px solid whitesmoke;
+      overflow:auto;
+      position: relative;
+      font-family: Arial;
+      left:350px;
+      top:16px;
+      background-color:whitesmoke;
     }
     img { 
-        bottom: 16px;
+      bottom: 16px;
     }
     figure {
       position: relative;
@@ -79,27 +80,24 @@
       width: 100%;
     } */
     iframe{
-        width: 100%;
-        border: 2px solid #ccc;
-        position: relative;
+      width: 100%;
+      border: 2px solid #ccc;
+      position: relative;
     }
     /* iframe {
-       width: 1200px; /* It should not be 100% */
-       /* height: 900px; */
-       /* margin-left: auto;   /* Automatic margin from left */
-       /* margin-right: auto; Automatic margin from right
-      } */
+      width: 1200px; /* It should not be 100% */
+      /* height: 900px; */
+      /* margin-left: auto;   /* Automatic margin from left */
+      /* margin-right: auto; Automatic margin from right
+    } */
   </style>
 
 </head>
 
 <body>
   <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-  <div class="container-fluid">
-    <!-- <a class="navbar-brand active" href="index.html">
-      <img src="../Images/Index_headerNEW1.png" alt="">
-    </a> -->
-    <a class="navbar-brand active" href="index.html">West End Financial</a>
+    <div class="container-fluid">
+      <a class="navbar-brand active" href="index.html">West End Financial</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -116,10 +114,11 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Machine Learning Code</a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Project Code</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="neural_network_code.html">Neural Network</a>
             <a class="dropdown-item" href="random_forest_code.html">Random Forest</a>
+            <a class="dropdown-item" href="app_code.html">Credit Approval App</a>
           </div>
         </li>
         <li class="nav-item">
@@ -172,7 +171,7 @@
   <br>
   <div class="iframe-container">
     <row justify-content-center>
-      <div class="col-7 mx-auto">
+      <div class="col-12 mx-auto">
       <iframe src="https://public.tableau.com/views/FinalProject_15881275593510/WEFDashboard?:display_count=y&:origin=viz_share_link:showVizHome=no&:embed=true" width=1368px height=800px></iframe>
       </row>
     </row>

@@ -67,13 +67,6 @@
       width: 100%;
       height: 100%;
     }
-    .embed-responsive {
-    position: relative;
-    display: block;
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    }
   </style>
 
 </head>
@@ -118,76 +111,38 @@
     <div class="row">
       <div class="col-lg-12 col-sm-12 col-xs-12 padding">
         <div class="image justify-content-left">
-          <img src="../Images/Index_headerNEW7b.png" class="img-fluid center-block">
+          <img src="../Images/Index_headerNEW6b.png" class="img-fluid center-block">
         </div>
       </div>
     </div>
   </div>
-  <br><br>
-  <div class="row justify-content-center">
-    <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">
-        <h2>Scoring</h2>
+  <br>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-sm-12 col-xs-12 padding">
+        <h1 class="text-center">app.py</h2>
+        <div class="image justify-content-center">
+          <img class="center-block img-fluid" src="../Images/App_Code1.png">
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-12 col-xs-12 padding">
+        <h1 class="text-center">data_packs.py</h2>
+        <div class="image justify-content-center">
+          <img class="center-block img-fluid" src="../Images/App_Code2.png">
+        </div><br>
+        <h2 class="text-center">How Heroku Works</h2>
         <div>
           <hr class="my-4">
         </div>
-        <p class="align-text-left">
-        The Project Team chose to score the model using a scorecard method by running a new regression to get the ten most important data points: Loan Amount, Checking Acct, Age, Loan Duration, Credit History, Employment, Savings Account, Installment Rate, Present Residence, and Job. 
-        </p>
+        <img src="../Images/App_Code4.png" alt="AltText" class="img-fluid mx-auto d-block">
+      </div>
+      <div class="col-lg-4 col-sm-12 col-xs-12 padding">
+        <h1 class="text-center">models.py</h2>
         <div class="image justify-content-center">
-          <img class="center-block img-fluid" src="../Images/Model_Comparison1.png">
+          <img class="center-block img-fluid" src="../Images/App_Code3.png">
         </div>
-        </p>
-        <p>
-        Next, the variables, with equal weight levels, were binned using the weight of evidence (WOE) binning technique. The WOE is a simple formula that calculates the importance of an independent variable to the dependent variable.
-        </p>
-        <div class="image justify-content-center">
-          <img class="center-block img-fluid" src="../Images/Model_Comparison2.png">
-        </div>
-        <div class="image justify-content-center">
-          <img class="center-block img-fluid" src="../Images/Model_Comparison4.png">
-        </div>
-        The charts below show how well the model performed. It appears that the test and trainin¬g data are very similar.  Both the training and test data proved that the model can discern from a good-risk or bad-risk customer data 80% of the time.
-        <br>
-        <div class="image justify-content-center">
-          <img class="center-block img-fluid" src="../Images/Model_Comparison3.png">
-        </div>
-        <br>
+      </div>
     </div>
-  </div>
-  <div class="row justify-content-center"> 
-    <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">    
-        <h2>Performance Evaluation</h2>
-        <div>
-          <hr class="my-4">
-        </div>
-        <p>
-        The performance evaluation ( perf_psi ) calculates the stability for the score and variables. It is used to run ongoing tests on the model to ensure the data received from the population does not change. This is important because overtime the data will change and the model should be tested and calibrated often. The formula is as follows:
-        </p>
-        <div class="image justify-content-center">
-          <img class="center-block img-fluid" src="../Images/Model_Comparison5.png">
-        </div>
-        <p>
-        When the PSI is less than 0.1 there is no real change in new data. When the PSI reaches 0.1 - 0.25 there is some minor change, and the model should be evaluated. Anything greater than 0.25 signifies a major change and model will need to be changed.
-        </p>
-        <div class="image justify-content-center">
-          <img class="center-block img-fluid" src="../Images/Model_Comparison6.png">
-        </div>
-        <p>
-        The PSI score for this model is fine at this time, however as previously stated, this should be tested often.
-        </p>
-        <br>
-        <h2>Risk Charts</h2>
-        <div>
-          <hr class="my-4">
-        </div>
-        <p>
-        The use of a risk chart is most helpful when evaluating models of fraud. As seen below:
-        </p>
-        <div class="image justify-content-center">
-          <img class="center-block img-fluid" src="../Images/Model_Comparison7.png">
-        </div>
-        <br><br>
-     </div>
   </div>
 
 </body>
