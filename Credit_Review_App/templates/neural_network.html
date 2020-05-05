@@ -32,6 +32,12 @@
         font-weight: normal;
         color:rgba(113, 114, 114, 0.993);
     }
+    h3 {
+        margin-bottom: 15px;
+        font-family: Segoe UI;
+        font-weight: normal;
+        color:rgba(113, 114, 114, 0.993);
+    }
     body {
         background-color: white;
     }
@@ -86,10 +92,11 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Machine Learning Code</a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Project Code</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="neural_network_code.html">Neural Network</a>
             <a class="dropdown-item" href="random_forest_code.html">Random Forest</a>
+            <a class="dropdown-item" href="app_code.html">Credit Approval App</a>
           </div>
         </li>
         <li class="nav-item">
@@ -112,7 +119,7 @@
   </div>
   <br>
   <div class="row justify-content-center">
-    <div class="col-lg-5 col-sm-6 col-xs-6 padding p2">
+    <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">
         <h2>Model Accuracy</h2>
         <div>
           <hr class="my-4">
@@ -121,9 +128,9 @@
         Model accuracy is at 76%, which is a practical ratio without over fitting the model.
         </div>
         <br>
-        <div class="row justify-content-left p-3">
+        <div class="row-fluid justify-content-left p-3">
           <div class="image">  
-            <img src="../Images/Neural_Eval.png" alt="">
+            <img src="../Images/Neural_Eval.png" class="img-fluid" alt="Responsive image">
           </div>
         </div>
         <h2>Prediction Results Output</h2>
@@ -148,20 +155,19 @@
           <li> print(f"Actual Outcome: {list(y_test[:])}")
         </ul>
         </div>
-        <div class="row justify-content-left">
+        <div class="row-fluid justify-content-left">
           <div class="image">
-          <img src="../Images/Neural1_Predictions.png" alt="">
+          <img src="../Images/Neural1_Predictions.png" class="img-fluid" alt="Responsive image">
           </div>
         </div>
-        <div class="row justify-content-left">
+        <!-- <div class="row justify-content-center">
           <div class="image">
           <img src="../Images/Neural_Graphic.png" alt="AltText" class="img-fluid">
           </div>
-        </div>
-        <br>
+        </div> -->
     </div>
-    <div class="col-lg-5 col-sm-6 col-xs-6 padding p2"> 
-        <h2>Importance Feature Data Frame</h2>
+    <div class="col-lg-10 col-sm-12 col-xs-12 padding p2"> 
+        <h2>Approval Status Data Frame</h2>
         <div>
           <hr class="my-4">
         </div>
@@ -178,23 +184,22 @@
           <li> If mixed results, approval status = Pending Further Analysis
         </ul>
         </div>
-        <br>
-        <div class="row justify-content-center">
+        <div class="row-fluid justify-content-center">
           <div class="image">
-          <img src="../Images/Neural2_DF.png" alt="AltText" class="img-fluid">
+          <img src="../Images/Neural2_DF.png" class="img-fluid" alt="Responsive image">
           </div>
         </div>
         <h2>Aggregate Predictive Outcomes Data Frame</h2>
         <div>
           <hr class="my-4">
         </div>
-        <div class="row justify-content-left">
+        <div class="row-fluid justify-content-left">
           <div class="image">
-            <img src="../Images/Neural5_AggDF.png" class="img-fluid">
+            <img src="../Images/Neural5_AggDF.png" class="img-fluid" alt="Responsive image">
           </div>
         </div>
         <div class="single-post-content justify-content-left">
-        The total Approval Status count and total Status Outcome were gathered.<br>
+        In order to generate the aggregate predictive outcomes, the total Approval Status count and total Status Outcome were determined.<br>
         <br>
         <ul>
           statusValueCount= approval_df["Approval_Status"].value_counts()<br>
@@ -205,11 +210,12 @@
         <ul>
           statusOutcomeRatio = statusValueCount/ totalStatusOutcome
         </ul>
-        The results of the Default Model indicated a high Approved rating of nearly <b>64%</b>. 
+        The results of the Default Model indicated a high Approved rating of nearly <b>64%</b>.<br>
         </div>
       </div>
     </div>
   </div>
+  <br><br>
   <div class="row justify-content-center">
     <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">
         <h1>Visualizations</h1>

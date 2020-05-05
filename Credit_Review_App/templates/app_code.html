@@ -15,7 +15,11 @@
     .navbar-light .navbar-brand {
         color: rgba(113, 114, 114, 0.993)
     }
-     
+    
+    /* .navbar-brand {
+        background-color: rgba(113, 114, 114, 0.993) ;
+    } */
+    
     h1 {
         margin-bottom: 15px;
         font-family: Segoe UI;
@@ -43,6 +47,11 @@
     }
     img { 
         bottom: 16px;
+    }
+    .image-center {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
     }
     figure {
       position: relative;
@@ -102,59 +111,40 @@
     <div class="row">
       <div class="col-lg-12 col-sm-12 col-xs-12 padding">
         <div class="image justify-content-left">
-          <img src="../Images/Index_headerNEW4.png" class="img-fluid center-block">
+          <img src="../Images/Index_headerNEW6b.png" class="img-fluid center-block">
         </div>
       </div>
     </div>
   </div>
-  <div class="row justify-content-center">
-    <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">
-      <br>
-      <h2>Top 10 Most Important Features</h2>
-      <div>
-        <hr class="my-4">
+  <br>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-sm-12 col-xs-12 padding">
+        <h1 class="text-center">app.py</h2>
+        <div class="image justify-content-center">
+          <img class="center-block img-fluid" src="../Images/App_Code1.png">
+        </div>
       </div>
-      <div class="single-post-content">
-      Definition: A random forest is a meta estimator that fits numerous decision tree classifiers on various sub-samples of the dataset and uses averaging to improve the predictive accuracy and control over-fitting.<br>
-      <br>
-      <a class="link" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">(scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)</a>
-      <br><br>
-      The Random Forest is ensemble method from SkLearn library, it shows how appropriated columns values to feature importance ratios.  So, each individual test has variable of conditions is based on a ratio importance that help determine the predicted result.  It is the based logic that outlines the mathematical process in the final decision and/or prediction.  The CliffsNotes of Machine Learning’s little black box.<br>
-      <br>
-      This Random Forest read in 31 Columns from the Credit DataOriginal.csv to classify.   The RandomForestClassifier from SkLearn fits the default.data (less the DEFAULT column) with  default.target ( just the DEFAULT column).<br> 
+      <div class="col-lg-4 col-sm-12 col-xs-12 padding">
+        <h1 class="text-center">data_packs.py</h2>
+        <div class="image justify-content-center">
+          <img class="center-block img-fluid" src="../Images/App_Code2.png">
+        </div><br>
+        <h2 class="text-center">How Heroku Works</h2>
+        <div>
+          <hr class="my-4">
+        </div>
+        <img src="../Images/App_Code4.png" alt="AltText" class="img-fluid mx-auto d-block">
       </div>
-      <div class="image-wrapper float-left p-4">
-        <img src="../Images/Forest1_DF.png" alt="">
-      </div>
-      <div class="single-post-content-wrapper">
-      In order to analyze the list, a Data Frame was created displaying Feature Importance and the corresponding rating.<br>
-      <br>
-      Then, the iloc of the top ten was utilized while sorting by descending order.<br>
-      <br>
-      This returned the Top Ten Importance Features that were used to revise specific columns in a new data frame.  The 10 columns along with the DEFAULT column became the Credit_Data_Revised.cvs used in the Neural Network Model.<br>
+      <div class="col-lg-4 col-sm-12 col-xs-12 padding">
+        <h1 class="text-center">models.py</h2>
+        <div class="image justify-content-center">
+          <img class="center-block img-fluid" src="../Images/App_Code3.png">
+        </div>
       </div>
     </div>
-    <div class="col-lg-10 col-sm-12 col-xs-12 padding p2">
-      <h2>Prediction Importance Feature and Acending Ratings</h2>
-      <div>
-        <hr class="my-4">
-      </div>
-      <div class="image-wrapper float-left pr-4">
-        <img src="../Images/Forest3_HBar.png" alt="">
-      </div>
-      <div class="single-post-content-wrapper">
-      Automatically, the RandomForestClassifier calculates the feature importance rating.<br>
-      <br>
-      The rating is the weighted value of each Feature (column) in the decision process.<br>
-      <br>
-      By sorting the feature importance in descending order, the highest feature rating lists 1–30.<br>
-      </div>
-      <br>
-    </div>
   </div>
-  </div>
-<br>
+
 </body>
 
 </html>
-
