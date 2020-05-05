@@ -23,7 +23,7 @@ def approval_check(crunchies, model_accuracy):
     # Determining Result based on model accuracy
     if model_accuracy > sufficient_accuracy:
         if approval_probability >= approved_probability:
-            return('Approval')
+            return('Approved')
         else:
             return('Declined')
 
@@ -31,7 +31,7 @@ def approval_check(crunchies, model_accuracy):
         if approval_probability >= approved_probability:
             return('Declined')
         else:
-            return('Approval')
+            return('Approved')
 
 
 

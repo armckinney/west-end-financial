@@ -11,7 +11,7 @@ from data_packs import field_list, general_field_list, packed_field_list, basic_
 from tensorflow import keras
 
 ### DEV TOOLS ###
-dev_mode = False
+dev_mode = True
 
 
 # Flask App Setup
