@@ -1,5 +1,5 @@
 '''
-Credit Crunch
+Credit Crunch by West End Financial - data_packs
 Author: Andrew McKinney
 Creation Date: 2020-04-28
 '''

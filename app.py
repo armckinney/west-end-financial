@@ -1,5 +1,5 @@
 '''
-Houston Flask App
+Credit Crunch by West End Financial
 Author: Andrew McKinney
 Creation Date: 2020-02-14
 '''
@@ -79,35 +79,40 @@ def crunch():
     ### DEV TOOLS ###
     return_evaluation = True
 
+    try:
+        # collecting standard items from form and making data dictionary if selection made
+        general_form_data = form_dict(general_field_list)
 
-    # @TODO:
-    # collecting standard items from form and making data dictionary if selection made
-    general_form_data = form_dict(general_field_list)
+        # collecting packed items from form and making data dictionary if selection made
+        packed_form_data = form_dict(packed_field_list)
 
-    # collecting packed items from form and making data dictionary if selection made
-    packed_form_data = form_dict(packed_field_list)
+        # unpack the packs
+        unpacked_form_data = unpacking(packed_form_data, packed_field_list)
+        
+        # appending unpacked data to general form data and sorting to model requirements
+        data_package = merge_dict(field_list, general_form_data, unpacked_form_data)
 
-    # unpack the packs
-    unpacked_form_data = unpacking(packed_form_data, packed_field_list)
+
+        # determining to use basic or dynamic model based on user inputs
+        if [item for item in data_package] == basic_model_field_list:
+            basic_model = True
+        else:
+            basic_model = False
+
+
+        # returning approval probability for user
+        crunchies, model_loss, model_accuracy = credit_crunch(data_package, return_evaluation, basic_model)
+
+        # determining approval status based on model accuracy and approval probability
+        approval_status = approval_check(crunchies, model_accuracy)
+        
+
+        return render_template("credit_approval_results.html", approval_status=approval_status)
     
-    # appending unpacked data to general form data and sorting to model requirements
-    data_package = merge_dict(field_list, general_form_data, unpacked_form_data)
+    # Error handeling due to internal app error or due to incorrect inputs
+    except:
 
-
-    # determining to use basic or dynamic model based on user inputs
-    if [item for item in data_package] == basic_model_field_list:
-        basic_model = True
-    else:
-        basic_model = False
-
-
-    # returning approval probability for user
-    crunchies, model_loss, model_accuracy = credit_crunch(data_package, return_evaluation, basic_model)
-
-    # determining approval status based on model accuracy and approval probability
-    approval_status = approval_check(crunchies, model_accuracy)
-
-    return render_template("credit_approval_results.html", approval_status=approval_status)
+        return render_template("index_error.html")
 
 
 

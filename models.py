@@ -1,5 +1,5 @@
 '''
-Credit Crunch
+Credit Crunch by West End Financial - models
 Author: Andrew McKinney
 Creation Date: 2020-04-28
 '''
