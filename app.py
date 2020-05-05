@@ -108,3 +108,5 @@ def crunch():
 if __name__ == "__main__":
     if dev_mode:
         app.run(debug=True)
+    else:
+        app.run(debug=False)
