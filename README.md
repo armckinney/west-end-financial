@@ -22,7 +22,7 @@ Version Author: Drew McKinney
 <br />
 <p align="center">
   <a href="https://westendfinancial.herokuapp.com/">
-    <img src="images/About_us.jpg" alt="Logo" width="100" height="100">
+    <img src="https://raw.githubusercontent.com/ARMcK-hub/West-End-Financial/master/Images/About_us.jpg" alt="Logo" width="100" height="100">
   </a>
 
   <h3 align="center">Credit Crunch by West End Financial</h3>
@@ -122,4 +122,4 @@ Hosted Link: [https://westendfinancial.herokuapp.com](https://westendfinancial.h
 [forks-url]: https://github.com/ARMcK-hub/West-End-Financial/network/members
 [stars-url]: https://github.com/ARMcK-hub/West-End-Financial/stargazers
 [issues-url]: https://github.com/ARMcK-hub/West-End-Financial/issues
-[product-screenshot]: images/App_Home.png
+[product-screenshot]: https://raw.githubusercontent.com/ARMcK-hub/West-End-Financial/master/Images/App_Home.png
