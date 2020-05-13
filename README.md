@@ -86,6 +86,13 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- CONTACT -->
 ## Contact
+Credit Crunch was developed by a highly disciplined team of individuals and each contributed to its success.
+
+To view the entire team, please visit our [hosted project page](https://westendfinancial.herokuapp.com/about_us.html)!
+
+<br/>
+
+Repository Owner:
 
 <img src="https://avatars3.githubusercontent.com/u/57081049?s=460&u=1260bc893922a063a29f437d8565e4b970fe45ca&v=4" width=200>
 <h3>Drew McKinney</h3>
