@@ -2,7 +2,7 @@
 <div align="center">
     <p>
     <!-- Header -->
-        <img width="100px" src="/images/About_us.jpg"  alt="west-end-financial" />
+        <img width="100px" src="/Images/About_us.jpg"  alt="west-end-financial" />
         <h2>Credit Crunch</h2>
         <p><i>by West End Financial</i></p>
     </p>
