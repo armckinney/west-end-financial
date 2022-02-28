@@ -52,4 +52,4 @@ The app utilizes various methods analysis, involves 2 key determination methods.
 
 
 ### Building for Heroku
-Heroku requires a `requirements.txt` in the root directory and Continuous Deployment is not configured for this repository. Thus, a manual dump of dependencies is required via executing `poetry todo` prior to deploying on Heroku.
+Heroku requires a `requirements.txt` in the root directory and Continuous Deployment is not configured for this repository. Thus, a manual dump of dependencies is required via executing `poetry export -f requirements.txt -o requirements.txt --without-hashes` prior to deploying on Heroku.

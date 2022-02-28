@@ -22,8 +22,8 @@ RUN mkdir /tmp/dockerinstall \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/dockerinstall
 
-# COPY poetry.lock pyproject.toml ${WORKSPACE}/
-# RUN cd $WORKSPACE && poetry install --no-root
+COPY poetry.lock pyproject.toml ${WORKSPACE}/
+RUN cd $WORKSPACE && poetry install --no-root
 
 # ----- Workspace Prep -----
 WORKDIR ${WORKSPACE}
