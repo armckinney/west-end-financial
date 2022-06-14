@@ -8,22 +8,22 @@
     </p>
     <p>
     <!-- Shields -->
-        <a href="https://github.com/armck-hub/west-end-financial/LICENSE">
-            <img alt="License" src="https://img.shields.io/github/license/armck-hub/west-end-financial.svg" />
+        <a href="https://github.com/armckinney/west-end-financial/LICENSE">
+            <img alt="License" src="https://img.shields.io/github/license/armckinney/west-end-financial.svg" />
         </a>
-        <a href="https://github.com/armck-hub/west-end-financial/actions">
-            <img alt="Tests Passing" src="https://github.com/armck-hub/west-end-financial/workflows/CI/badge.svg" />
+        <a href="https://github.com/armckinney/west-end-financial/actions">
+            <img alt="Tests Passing" src="https://github.com/armckinney/west-end-financial/workflows/CI/badge.svg" />
         </a>
-        <a href="https://codecov.io/gh/armck-hub/west-end-financial">
-            <img alt="Code Coverage" src="https://codecov.io/gh/armck-hub/west-end-financial/branch/master/graph/badge.svg" />
+        <a href="https://codecov.io/gh/armckinney/west-end-financial">
+            <img alt="Code Coverage" src="https://codecov.io/gh/armckinney/west-end-financial/branch/master/graph/badge.svg" />
         </a>
-        <a href="https://github.com/armck-hub/west-end-financial/issues">
-            <img alt="Issues" src="https://img.shields.io/github/issues/armck-hub/west-end-financial" />
+        <a href="https://github.com/armckinney/west-end-financial/issues">
+            <img alt="Issues" src="https://img.shields.io/github/issues/armckinney/west-end-financial" />
         </a>
-        <a href="https://github.com/armck-hub/west-end-financial/pulls">
-            <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/armck-hub/west-end-financial" />
+        <a href="https://github.com/armckinney/west-end-financial/pulls">
+            <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/armckinney/west-end-financial" />
         </a>
-        <a href="https://stackshare.io/armck-hub/west-end-financial">
+        <a href="https://stackshare.io/armck/west-end-financial">
             <img alt="StackShare.io" src="http://img.shields.io/badge/tech-stack-0690fa.svg?label=StackShare.io">
         </a>
     </p>
@@ -31,9 +31,9 @@
     <!-- Links -->
         <a href="https://westendfinancial.herokuapp.com/" target="_blank">View Demo</a>
         ·
-        <a href="https://github.com/armck-hub/west-end-financial/issues/new/choose">Report Bug</a>
+        <a href="https://github.com/armckinney/west-end-financial/issues/new/choose">Report Bug</a>
         ·
-        <a href="https://github.com/armck-hub/west-end-financial/issues/new/choose">Request Feature</a>
+        <a href="https://github.com/armckinney/west-end-financial/issues/new/choose">Request Feature</a>
     </p>
 </div>
 <br>
