@@ -16,14 +16,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN mkdir /tmp/dockerinstall \
     && cd /tmp/dockerinstall \
     # Installs
+    && python3 -m pip install azure-functions \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/dockerinstall
 
-COPY poetry.lock pyproject.toml ${WORKSPACE}/
-RUN cd $WORKSPACE && poetry install --no-root
+COPY ./src/api/poetry.lock ./src/api/pyproject.toml ${WORKSPACE}/src/api
+RUN cd $WORKSPACE/src/api && poetry install --no-root
 
 # ----- Workspace Prep -----
 WORKDIR ${WORKSPACE}

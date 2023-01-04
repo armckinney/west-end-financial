@@ -5,7 +5,7 @@
 	],
 	"service": "dev-container",
 	"workspaceFolder": "/workspaces/west-end-financial",
-	"postCreateCommand": "cd $WORKSPACE && poetry install",
+	"postCreateCommand": "cd $WORKSPACE/src/api && poetry install",
 	"settings": {
 		"terminal.integrated.profiles.linux": {
 			"bash": {
@@ -22,6 +22,8 @@
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"shd101wyy.markdown-preview-enhanced",
-		"janisdd.vscode-edit-csv"
+		"janisdd.vscode-edit-csv",
+		"ms-azuretools.vscode-azurefunctions",
+		"ms-dotnettools.csharp"
 	]
 }
