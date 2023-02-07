@@ -1,24 +1,29 @@
-'''
+"""
 Credit Crunch by West End Financial
 Author: Andrew McKinney
 Creation Date: 2020-02-14
-'''
+"""
 
 # Import Dependencies
 from flask import Flask, render_template
-from models import credit_crunch, approval_check
-from data_packs import field_list, general_field_list, packed_field_list, basic_model_field_list, form_dict, unpacking, merge_dict
-from tensorflow import keras
 
-### DEV TOOLS ###
+from data_packs import (
+    basic_model_field_list,
+    field_list,
+    form_dict,
+    general_field_list,
+    merge_dict,
+    packed_field_list,
+    unpacking,
+)
+from models import approval_check, credit_crunch
+
+# DEV TOOLS
 dev_mode = False
 
 
 # Flask App Setup
-app = Flask(__name__, static_folder='Images')
-
-
-
+app = Flask(__name__, static_folder="Images")
 
 
 #################################################
@@ -73,10 +78,10 @@ def about_us():
 
 
 # crunching user input for approval
-@app.route("/form_submit", methods=['POST'])
+@app.route("/form_submit", methods=["POST"])
 def crunch():
 
-    ### DEV TOOLS ###
+    # DEV TOOLS
     return_evaluation = True
 
     try:
@@ -88,10 +93,9 @@ def crunch():
 
         # unpack the packs
         unpacked_form_data = unpacking(packed_form_data, packed_field_list)
-        
+
         # appending unpacked data to general form data and sorting to model requirements
         data_package = merge_dict(field_list, general_form_data, unpacked_form_data)
-
 
         # determining to use basic or dynamic model based on user inputs
         if [item for item in data_package] == basic_model_field_list:
@@ -99,25 +103,23 @@ def crunch():
         else:
             basic_model = False
 
-
         # returning approval probability for user
-        crunchies, model_loss, model_accuracy = credit_crunch(data_package, return_evaluation, basic_model)
+        crunchies, model_loss, model_accuracy = credit_crunch(
+            data_package, return_evaluation, basic_model
+        )
 
         # determining approval status based on model accuracy and approval probability
         approval_status = approval_check(crunchies, model_accuracy)
-        
 
-        return render_template("credit_approval_results.html", approval_status=approval_status)
-    
+        return render_template(
+            "credit_approval_results.html", approval_status=approval_status
+        )
+
     # Error handeling due to internal app error or due to incorrect inputs
-    except:
+    except Exception:
 
         return render_template("index_error.html")
 
 
-
 if __name__ == "__main__":
-    if dev_mode:
-        app.run(debug=True)
-    else:
-        app.run(debug=False)
+    app.run(debug=dev_mode)

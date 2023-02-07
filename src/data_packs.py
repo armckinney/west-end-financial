@@ -1,38 +1,95 @@
-'''
+"""
 Credit Crunch by West End Financial - data_packs
 Author: Andrew McKinney
 Creation Date: 2020-04-28
-'''
+"""
 
 
+# Field Lists used in packing and unpacking of data
+field_list = [
+    "CHK_ACCT",
+    "DURATION",
+    "HISTORY",
+    "NEW_CAR",
+    "USED_CAR",
+    "FURNITURE",
+    "RADIO_TV",
+    "EDUCATION",
+    "RETRAINING",
+    "AMOUNT",
+    "SAV_ACCT",
+    "EMPLOYMENT",
+    "INSTALL_RATE",
+    "MALE_DIV",
+    "MALE_SINGLE",
+    "MALE_MAR_or_WID",
+    "CO_APPLICANT",
+    "GUARANTOR",
+    "PRESENT_RESIDENT",
+    "REAL_ESTATE",
+    "PROP_UNKN_NONE",
+    "AGE",
+    "OTHER_INSTALL",
+    "RENT",
+    "OWN_RES",
+    "NUM_CREDITS",
+    "JOB",
+    "NUM_DEPENDENTS",
+    "TELEPHONE",
+    "FOREIGN",
+]
 
-### Field Lists used in packing and unpacking of data
-field_list = ['CHK_ACCT', 'DURATION', 'HISTORY', 'NEW_CAR', 'USED_CAR', 'FURNITURE', 'RADIO_TV', 'EDUCATION', 'RETRAINING',
-'AMOUNT', 'SAV_ACCT', 'EMPLOYMENT', 'INSTALL_RATE', 'MALE_DIV', 'MALE_SINGLE', 'MALE_MAR_or_WID', 'CO_APPLICANT', 'GUARANTOR', 
-'PRESENT_RESIDENT', 'REAL_ESTATE', 'PROP_UNKN_NONE', 'AGE', 'OTHER_INSTALL', 'RENT', 'OWN_RES', 'NUM_CREDITS', 'JOB', 
-'NUM_DEPENDENTS', 'TELEPHONE', 'FOREIGN']
+general_field_list = [
+    "CHK_ACCT",
+    "DURATION",
+    "HISTORY",
+    "AMOUNT",
+    "SAV_ACCT",
+    "EMPLOYMENT",
+    "INSTALL_RATE",
+    "CO_APPLICANT",
+    "GUARANTOR",
+    "PRESENT_RESIDENT",
+    "AGE",
+    "OTHER_INSTALL",
+    "NUM_CREDITS",
+    "JOB",
+    "NUM_DEPENDENTS",
+    "TELEPHONE",
+    "FOREIGN",
+]
 
-general_field_list = ['CHK_ACCT', 'DURATION', 'HISTORY', 'AMOUNT', 'SAV_ACCT', 'EMPLOYMENT', 'INSTALL_RATE', 
-'CO_APPLICANT', 'GUARANTOR', 'PRESENT_RESIDENT', 'AGE', 'OTHER_INSTALL', 'NUM_CREDITS', 'JOB', 
-'NUM_DEPENDENTS', 'TELEPHONE', 'FOREIGN']
-
-packed_field_list = {'PURPOSE':['NEW_CAR', 'USED_CAR', 'FURNITURE', 'RADIO_TV', 'EDUCATION', 'RETRAINING'], 
-'SEX_REL':['MALE_DIV', 'MALE_SINGLE', 'MALE_MAR_or_WID'], 
-'RES_STAT':['RENT', 'OWN_RES'], 
-'REAL_STAT':['REAL_ESTATE', 'PROP_UNKN_NONE']}
+packed_field_list = {
+    "PURPOSE": [
+        "NEW_CAR",
+        "USED_CAR",
+        "FURNITURE",
+        "RADIO_TV",
+        "EDUCATION",
+        "RETRAINING",
+    ],
+    "SEX_REL": ["MALE_DIV", "MALE_SINGLE", "MALE_MAR_or_WID"],
+    "RES_STAT": ["RENT", "OWN_RES"],
+    "REAL_STAT": ["REAL_ESTATE", "PROP_UNKN_NONE"],
+}
 
 # basic model list (UNSORTED)
-basic_model_field_list = ['CHK_ACCT', 'DURATION', 'HISTORY', 'AMOUNT', 'SAV_ACCT', 'EMPLOYMENT', 'INSTALL_RATE', 'PRESENT_RESIDENT', 
-'AGE', 'JOB']
-
-
-
-
-
+basic_model_field_list = [
+    "CHK_ACCT",
+    "DURATION",
+    "HISTORY",
+    "AMOUNT",
+    "SAV_ACCT",
+    "EMPLOYMENT",
+    "INSTALL_RATE",
+    "PRESENT_RESIDENT",
+    "AGE",
+    "JOB",
+]
 
 
 def form_dict(field_list):
-# collecting items from form and making data dictionary
+    # collecting items from form and making data dictionary
 
     from flask import request
 
@@ -50,9 +107,8 @@ def form_dict(field_list):
     return form_data
 
 
-
 def unpacking(packed_data, packed_field_list):
-# unpacking packed data inside of packed fields from input form
+    # unpacking packed data inside of packed fields from input form
 
     unpacked_data = {}
 
@@ -71,28 +127,26 @@ def unpacking(packed_data, packed_field_list):
             else:
                 unpacked_data[field] = 0
 
-
     return unpacked_data
 
 
-
 def merge_dict(field_list, form_data_1, form_data_2):
-# merging dictionary datas to sorted field list, returning as dictionary data package
+    # merging dictionary datas to sorted field list, returning as dictionary data package
 
     data_package = {}
-    
+
     # looping through sorted field list to acquire field value
     for field in field_list:
 
         # checking for field data in form_data dictionaries
         try:
             field_value = form_data_1[field]
-        except:
+        except Exception:
             try:
                 field_value = form_data_2[field]
-            except:
+            except Exception:
                 continue
-        
+
         # appending integer value of field data to data_package
         data_package[field] = int(field_value)
 
