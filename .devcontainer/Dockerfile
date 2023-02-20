@@ -1,4 +1,3 @@
-
 FROM armck/python-base:latest
 
 # ----- Environment Setup -----
@@ -16,15 +15,25 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN mkdir /tmp/dockerinstall \
     && cd /tmp/dockerinstall \
     # Installs
-    && python3 -m pip install azure-functions \
+    # Azure CLI
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main"  > /etc/apt/sources.list.d/azure-cli.list \
+    && apt-get update && apt-get -y install \
+        azure-cli \
+    && az extension add --name containerapp --upgrade \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/dockerinstall
 
-COPY ./src/api/poetry.lock ./src/api/pyproject.toml ${WORKSPACE}/src/api
-RUN cd $WORKSPACE/src/api && poetry install --no-root
+COPY ./src/api/poetry.lock ./src/api/pyproject.toml ${WORKSPACE}/src/api/
+RUN cd $WORKSPACE/src/api/ && poetry install --no-root
+
+
+# COPY ./app /code/app
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "3500"]
+
 
 # ----- Workspace Prep -----
 WORKDIR ${WORKSPACE}
