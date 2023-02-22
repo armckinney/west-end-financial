@@ -27,11 +27,10 @@ RUN mkdir /tmp/dockerinstall \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/dockerinstall
 
-COPY ./src/api/poetry.lock ./src/api/pyproject.toml ${WORKSPACE}/src/api/
-RUN cd $WORKSPACE/src/api/ && poetry install --no-root
+COPY ./poetry.lock ./pyproject.toml ./app ${WORKSPACE}/
+RUN cd $WORKSPACE/ && poetry install --no-root
 
 
-# COPY ./app /code/app
 # CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "3500"]
 
 

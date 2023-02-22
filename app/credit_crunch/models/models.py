@@ -4,6 +4,10 @@ Author: Andrew McKinney
 Creation Date: 2020-04-28
 """
 
+import os
+
+__ROOT_DIRECTORY = os.environ.get("__ROOT_DIRECTORY")
+
 
 def approval_check(crunchies, model_accuracy):
     # approval_check determines the approval status of an applicant based on the approval probability and determining model accuracy
@@ -38,7 +42,7 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
     # return_evaluation should be a boolean value (true/false) on whether or not to return model evaluation metrics with function
     # Generic NN model parameters can be set in the DEV TOOLS.
 
-    ### DEV TOOLS ###
+    # DEV TOOLS
     return_model_evaluation = return_evaluation
     numpy_seed = 42
     number_inputs = len(data_package)
@@ -63,25 +67,26 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
     np.random.seed(numpy_seed)
 
     # import train data
-    # TODO:
-    raw_data = pd.read_csv("datasets/Credit_Data_Raw.csv")
+    raw_data = pd.read_csv(
+        os.path.join(__ROOT_DIRECTORY, "static/data/Credit_Data_Raw.csv")
+    )
 
     raw_data.dropna()
 
     # defining labels, input fields, and input form data
-    X = raw_data.drop("DEFAULT", axis=1)[[item for item in data_package]]
+    x = raw_data.drop("DEFAULT", axis=1)[[item for item in data_package]]
     y = np.array(raw_data["DEFAULT"]).reshape(-1, 1)
     data_bundle = np.array(list([data_package[item] for item in data_package])).reshape(
         1, -1
     )
 
     # spliting data to test and training sets
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.25, random_state=42
+    x_train, x_test, y_train, y_test = train_test_split(
+        x, y, test_size=0.25, random_state=42
     )
 
     # creating scaler data
-    X_scaler = MinMaxScaler().fit(X_train)
+    x_scaler = MinMaxScaler().fit(x_train)
 
     # loading pre-defined model
     if basic_model:
@@ -95,8 +100,8 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
     else:
 
         # scaling data
-        X_train_scaled = X_scaler.transform(X_train)
-        X_test_scaled = X_scaler.transform(X_test)
+        x_train_scaled = x_scaler.transform(x_train)
+        x_test_scaled = x_scaler.transform(x_test)
 
         # one-hot-encoding labels
         label_encoder = LabelEncoder()
@@ -136,7 +141,7 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
 
         # fitting model to training data
         model.fit(
-            X_train_scaled,
+            x_train_scaled,
             y_train_categorical,
             epochs=number_epochs,
             shuffle=True,
@@ -145,11 +150,11 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
 
         # evaluating dynamic model
         model_loss, model_accuracy = model.evaluate(
-            X_test_scaled, y_test_categorical, verbose=0
+            x_test_scaled, y_test_categorical, verbose=0
         )
 
     # scaling data bundle
-    data_bundle_scaled = X_scaler.transform(data_bundle)
+    data_bundle_scaled = x_scaler.transform(data_bundle)
 
     # predicting approval for user (1st # is Approval Probability or 2nd # is Default Probability)
     crunchies = model.predict(data_bundle_scaled)

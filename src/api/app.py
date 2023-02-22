@@ -4,11 +4,7 @@ Author: Andrew McKinney
 Creation Date: 2020-02-14
 """
 
-# Import Dependencies
-from flask import Flask, render_template
-from tensorflow import keras
-
-from api.data_packs import (
+from data_packs import (
     basic_model_field_list,
     field_list,
     form_dict,
@@ -17,7 +13,10 @@ from api.data_packs import (
     packed_field_list,
     unpacking,
 )
-from api.models import approval_check, credit_crunch
+
+# Import Dependencies
+from flask import Flask, render_template
+from models import approval_check, credit_crunch
 
 ### DEV TOOLS ###
 dev_mode = False
