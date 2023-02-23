@@ -58,25 +58,6 @@ def random_forest(request: Request):
     )
 
 
-@app.route("/neural_network_code.html")
-def neural_network_code(request: Request):
-    return templates.TemplateResponse(
-        "neural_network_code.html", context={"request": request}
-    )
-
-
-@app.route("/random_forest_code.html")
-def random_forest_code(request: Request):
-    return templates.TemplateResponse(
-        "random_forest_code.html", context={"request": request}
-    )
-
-
-@app.route("/app_code.html")
-def app_code(request: Request):
-    return templates.TemplateResponse("app_code.html", context={"request": request})
-
-
 @app.route("/model_comparison.html")
 def model_comparison(request: Request):
     return templates.TemplateResponse(
