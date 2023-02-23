@@ -29,7 +29,7 @@
     </p>
     <p>
     <!-- Links -->
-        <a href="https://westendfinancial.herokuapp.com/" target="_blank">View Demo</a>
+        <a href="todo" target="_blank">View Demo</a>
         ·
         <a href="https://github.com/armckinney/west-end-financial/issues/new/choose">Report Bug</a>
         ·
@@ -49,7 +49,3 @@ The app utilizes various methods analysis, involves 2 key determination methods.
 * It can pre-approve your customers for a credit line
 * It can enable cross-selling of other financial products such as savings and checking accounts
 * It can reduce overhead and responsabilities of your Credit Loan Officers
-
-
-### Building for Heroku
-Heroku requires a `requirements.txt` in the root directory and Continuous Deployment is not configured for this repository. Thus, a manual dump of dependencies is required via executing `poetry export -f requirements.txt -o requirements.txt --without-hashes` prior to deploying on Heroku.
