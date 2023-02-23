@@ -21,8 +21,7 @@
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"shd101wyy.markdown-preview-enhanced",
-				"janisdd.vscode-edit-csv",
-				"ms-azuretools.vscode-azurefunctions"
+				"janisdd.vscode-edit-csv"
 			]
 		}
 	}
