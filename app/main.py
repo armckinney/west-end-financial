@@ -21,7 +21,10 @@ from app.credit_crunch.utils import (
 __ROOT_DIRECTORY = str(Path(__file__).parent)
 os.environ["__ROOT_DIRECTORY"] = __ROOT_DIRECTORY
 
-app = FastAPI()
+app = FastAPI(
+    title="Credit Crunch",
+    description="Credit Risk Analysis Web Application built on a Neural Net back-end",
+)
 
 app.mount(
     "/static",
@@ -112,8 +115,7 @@ async def crunch(request: Request):
         )
 
     # Error handeling due to internal app error or due to incorrect inputs
-    except Exception as e:
-        print(e)
+    except Exception:
         return templates.TemplateResponse(
             "index_error.html", context={"request": request}
         )
