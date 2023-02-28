@@ -103,7 +103,7 @@ echo -e "${indent}${blue}Creating Container App ($containerApp).${nocolor}"
 az containerapp create \
   --name $containerApp \
   --resource-group $resourceGroup \
-  --environment $environment \
+  --environment $containerAppEnv \
   --image $imageName \
   --target-port 3500 \
   --ingress 'external' \
