@@ -1,5 +1,9 @@
 FROM armck/python-base:latest
 
+LABEL   deployable="false" \
+        decription="This is the development version of the WEF application container. \
+                    It includes the application and required development tools."
+
 # ----- Environment Setup -----
 
 # Set Workspace directory
@@ -27,11 +31,10 @@ RUN mkdir /tmp/dockerinstall \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/dockerinstall
 
-COPY ./poetry.lock ./pyproject.toml ./app ${WORKSPACE}/
+
+# ----- Bring project files into container -----
+COPY ./poetry.lock ./pyproject.toml ${WORKSPACE}/
 RUN cd $WORKSPACE/ && poetry install --no-root
-
-
-# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "3500"]
 
 
 # ----- Workspace Prep -----
