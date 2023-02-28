@@ -6,7 +6,7 @@ Creation Date: 2020-04-28
 
 import os
 
-__ROOT_DIRECTORY = os.environ.get("__ROOT_DIRECTORY")
+from app import _ROOT_DIRECTORY
 
 
 def approval_check(crunchies, model_accuracy):
@@ -68,7 +68,7 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
 
     # import train data
     raw_data = pd.read_csv(
-        os.path.join(__ROOT_DIRECTORY, "static/data/Credit_Data_Raw.csv")
+        os.path.join(_ROOT_DIRECTORY, "static/data/Credit_Data_Raw.csv")
     )
 
     raw_data.dropna()
@@ -90,7 +90,6 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
 
     # loading pre-defined model
     if basic_model:
-
         model = keras.models.load_model("models/DEFAULT_model_trained_top_10.h5")
 
         model_loss = 0.5177
@@ -98,7 +97,6 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
 
     # creating dynamic model based on passed data bundle
     else:
-
         # scaling data
         x_train_scaled = x_scaler.transform(x_train)
         x_test_scaled = x_scaler.transform(x_test)
@@ -161,9 +159,7 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
 
     # returning model evaluation if turned on
     if return_model_evaluation:
-
         return crunchies, model_loss, model_accuracy
 
     else:
-
         return crunchies

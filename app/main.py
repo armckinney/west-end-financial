@@ -1,12 +1,13 @@
 import os
-from pathlib import Path
 
 import uvicorn
 from fastapi.applications import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.requests import Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from app import _ROOT_DIRECTORY
 from app.credit_crunch.models import approval_check, credit_crunch
 from app.credit_crunch.utils import (
     basic_model_field_list,
@@ -18,20 +19,25 @@ from app.credit_crunch.utils import (
     unpacking,
 )
 
-__ROOT_DIRECTORY = str(Path(__file__).parent)
-os.environ["__ROOT_DIRECTORY"] = __ROOT_DIRECTORY
-
 app = FastAPI(
     title="Credit Crunch",
     description="Credit Risk Analysis Web Application built on a Neural Net back-end",
 )
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods="GET",
+    allow_headers=["*"],
+)
 app.mount(
     "/static",
-    StaticFiles(directory=os.path.join(__ROOT_DIRECTORY, "static")),
+    StaticFiles(directory=os.path.join(_ROOT_DIRECTORY, "static")),
     name="static",
 )
-templates = Jinja2Templates(directory=os.path.join(__ROOT_DIRECTORY, "templates"))
+templates = Jinja2Templates(directory=os.path.join(_ROOT_DIRECTORY, "templates"))
 
 
 @app.get("/")
@@ -76,7 +82,6 @@ def about_us(request: Request):
 # crunching user input for approval
 @app.route("/form_submit", methods=["POST"])
 async def crunch(request: Request):
-
     # DEV TOOLS
     return_evaluation = True
 
