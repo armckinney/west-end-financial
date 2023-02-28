@@ -21,7 +21,7 @@ def approval_check(crunchies, model_accuracy):
     # 2nd value, [1], is default probability
     approval_probability = crunchies[0][0]
 
-    # Determining Result based on model accuracy
+    # Determining Result based on model accuracy (this could be updated to have a "maybe")
     if model_accuracy > sufficient_accuracy:
         if approval_probability >= approved_probability:
             return "Approved"
@@ -30,9 +30,9 @@ def approval_check(crunchies, model_accuracy):
 
     else:
         if approval_probability >= approved_probability:
-            return "Declined"
-        else:
             return "Approved"
+        else:
+            return "Declined"
 
 
 def credit_crunch(data_package, return_evaluation=False, basic_model=False):
@@ -90,7 +90,11 @@ def credit_crunch(data_package, return_evaluation=False, basic_model=False):
 
     # loading pre-defined model
     if basic_model:
-        model = keras.models.load_model("models/DEFAULT_model_trained_top_10.h5")
+        model = keras.models.load_model(
+            os.path.join(
+                _ROOT_DIRECTORY, "static/models/DEFAULT_model_trained_top_10.h5"
+            )
+        )
 
         model_loss = 0.5177
         model_accuracy = 0.7680
