@@ -12,14 +12,14 @@ indent="     "
 helpFunction()
 {
    echo ""
-   echo "Usage: $0 -n myapp -r dockerhubuser -e dev -f ./my/Dockerfile -t 1.0 -a"
+   echo "Usage: $0 -n myapp -r dockerhubuser -e dev -f ./my/Dockerfile -t 1.0 -acr"
    echo -e "\t-n    Name of the application. Must contain only alpha characters."
    echo -e "\t-r    Name of the container registry to serve from. Default: DockerHub username, else ACR name if -acr given."
    echo -e "\t-e    (Optional) Name of the deployed environment. Must contain only alpha characters. Default: prod"
    echo -e "\t-l    (Optional) Location of the deployed environment. Default: eastus"
    echo -e "\t-f    (Optional) Path of the Dockerfile to build and deploy. Default: ./app/Dockerfile"
    echo -e "\t-t    (Optional) Image Tag. Default: latest"
-   echo -e "\t-a    (Optional) Flag indicating to create and utilize an Azure Container Registry."
+   echo -e "\t-acr  (Optional) Flag indicating to create and utilize an Azure Container Registry."
    echo ""
    exit 1
 }
