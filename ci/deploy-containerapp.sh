@@ -80,8 +80,7 @@ then
     az acr create \
         --resource-group $resourceGroup \
         --name $registryName \
-        --sku Basic \
-        --admin-enabled true # might be able to just use MI to ContainerApp to ACR if AcrPull role assigned
+        --sku Basic
 
     echo -e "${indent}${blue}Logging into Azure Container Registry ($registryName)${nocolor}"
     az acr login --name $registryName
@@ -100,14 +99,32 @@ echo -e "${indent}${blue}Pushing Image to Registry ($imageName).${nocolor}"
 docker push $imageName
 
 echo -e "${indent}${blue}Creating Container App ($containerApp).${nocolor}"
-az containerapp create \
-  --name $containerApp \
-  --resource-group $resourceGroup \
-  --environment $containerAppEnv \
-  --image $imageName \
-  --target-port 3500 \
-  --ingress 'external' \
-  --registry-server $registryServer
+if [ $acr ]
+then
+  az containerapp create \
+    --name $containerApp \
+    --resource-group $resourceGroup \
+    --environment $containerAppEnv \
+    --image $imageName \
+    --target-port 3500 \
+    --ingress 'external' \
+    --registry-server $registryServer \
+    --registry-identity 'system' \
+    --system-assigned
+else
+# for docker registries, ensure env vars CONTAINER_REGISTRY_USERNAME and CONTAINER_REGISTRY_PASSWORD are available
+# todo: see if docker public requires these
+  az containerapp create \
+    --name $containerApp \
+    --resource-group $resourceGroup \
+    --environment $containerAppEnv \
+    --image $imageName \
+    --target-port 3500 \
+    --ingress 'external' \
+    --registry-server $registryServer \
+    --registry-username $CONTAINER_REGISTRY_USERNAME \
+    --registry-password $CONTAINER_REGISTRY_PASSWORD
+fi
 
 
 #####   FAIL ON EXIT    #####
