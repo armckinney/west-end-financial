@@ -55,6 +55,7 @@ if [ -z $imageTag ]; then imageTag=latest; fi
 if [ $acr ]; then registryServer=$registryName.azurecr.io; else registryServer=docker.io/$registryName; fi
 
 resourceGroup=rg-$appName-$environment
+logAnalyticsWorkspace=log-$appName-$environment
 containerApp=ca-$appName-$environment
 containerAppEnv=cae-$appName-$environment
 imageName=$registryServer/$appName:$imageTag
@@ -78,19 +79,37 @@ if [ $acr ]
 then
     echo -e "${indent}${blue}Deploying Azure Container Registry ($registryName)${nocolor}"
     az acr create \
-        --resource-group $resourceGroup \
-        --name $registryName \
-        --sku Basic
+      --resource-group $resourceGroup \
+      --name $registryName \
+      --sku Basic
 
     echo -e "${indent}${blue}Logging into Azure Container Registry ($registryName)${nocolor}"
     az acr login --name $registryName
 fi
 
+echo -e "${indent}${blue}Deploying Log Analytics Workspace ($logAnalyticsWorkspace).${nocolor}"
+logAnalyticsCustomerId=$(az monitor log-analytics workspace create \
+  -n $logAnalyticsWorkspace \
+  -g $resourceGroup \
+  -l $location \
+  --query customerId \
+  | awk -F[\"\"] '{print $2}' )
+
+logAnalyticsKey=$(az monitor log-analytics workspace get-shared-keys \
+  -n $logAnalyticsWorkspace \
+  -g $resourceGroup \
+  --query primarySharedKey \
+  | awk -F[\"\"] '{print $2}' )
+
+echo "Created Log Analytics Workspace"
+
 echo -e "${indent}${blue}Deploying Container App Environment ($containerAppEnv).${nocolor}"
 az containerapp env create \
   --name $containerAppEnv \
   --resource-group $resourceGroup \
-  --location "$location"
+  --location "$location" \
+  --logs-workspace-id $logAnalyticsCustomerId \
+  --logs-workspace-key $logAnalyticsKey
 
 echo -e "${indent}${blue}Building Image ($imageName) from Dockerfile ($dockerfile).${nocolor}"
 docker build -t $imageName -f $dockerfile .
