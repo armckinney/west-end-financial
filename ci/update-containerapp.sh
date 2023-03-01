@@ -24,7 +24,7 @@ helpFunction()
 }
 
 # acquiring opts, prints helpFunction in case parameter is non-existent
-while getopts "n:r:e:f:t:acr:" opt
+while getopts "n:r:e:f:t:a:" opt
 do
     case "$opt" in
         n ) appName="$OPTARG" ;;
@@ -32,13 +32,13 @@ do
         e ) environment="$OPTARG" ;;
         f ) dockerfile="$OPTARG" ;;
         t ) imageTag="$OPTARG" ;;
-        acr ) acr="$OPTARG" ;;
+        a ) acr="$OPTARG" ;;
         ? ) helpFunction ;;
     esac
 done
 
 # Print helpFunction in case parameters are empty
-if [ -z "$appName" ] || [ -z "$registryName"]
+if [ -z "$appName" ] || [ -z "$registryName" ]
 then
    echo -e "${indent}${red}Some or all of the parameters are empty${nocolor}";
    helpFunction
@@ -55,7 +55,7 @@ resourceGroup=rg-$appName-$environment
 containerApp=ca-$appName-$environment
 imageName=$registryServer/$appName:$imageTag
 
-if [ -z "$containerApp" ] || [ -z "$resourceGroup"] || [ -z $dockerfile ] || [ -z $imageName ]
+if [ -z "$containerApp" ] || [ -z "$resourceGroup" ] || [ -z $dockerfile ] || [ -z $imageName ]
 then
    echo -e "${indent}${red}Some or all of the parameters are empty${nocolor}";
    helpFunction
@@ -67,8 +67,8 @@ failure=0
 
 if [ $acr ]
 then 
-    echo -e "${indent}${blue}Logging into Aure Container Registry ($acrName).${nocolor}"
-    az acr login --name $acrName
+    echo -e "${indent}${blue}Logging into Aure Container Registry ($registryName).${nocolor}"
+    az acr login --name $registryName
 fi
 
 echo -e "${indent}${blue}Building Image ($imageName) from Dockerfile ($dockerfile).${nocolor}"
@@ -89,6 +89,6 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ $failure -ne 0 ]; then
-   echo -e "${indent}${red}An issue has occure in this todo script.${nocolor}"
+   echo -e "${indent}${red}An issue has occured in deployment.${nocolor}"
    exit 1
 fi

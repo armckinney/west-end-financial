@@ -116,6 +116,6 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ $failure -ne 0 ]; then
-   echo -e "${indent}${red}An issue has occure in this todo script.${nocolor}"
+   echo -e "${indent}${red}An issue has occured in deployment.${nocolor}"
    exit 1
 fi
