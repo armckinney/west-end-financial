@@ -2,7 +2,7 @@
 <div align="center">
     <p>
     <!-- Header -->
-        <img width="100px" src="/Images/About_us.jpg"  alt="west-end-financial" />
+        <img width="100px" src="app/static/images/About_us.jpg"  alt="west-end-financial" />
         <h2>Credit Crunch</h2>
         <p><i>by West End Financial</i></p>
     </p>
@@ -29,7 +29,7 @@
     </p>
     <p>
     <!-- Links -->
-        <a href="https://westendfinancial.herokuapp.com/" target="_blank">View Demo</a>
+        <a href="https://ca-westendfinancial-prod.ashymoss-cd1cd23a.eastus.azurecontainerapps.io" target="_blank">View Demo</a>
         ·
         <a href="https://github.com/armckinney/west-end-financial/issues/new/choose">Report Bug</a>
         ·
@@ -44,12 +44,75 @@ Credit Crunch is a credit risk analysis web application built by the team at Wes
 
 The app utilizes various methods analysis, involves 2 key determination methods. One being a pre-developed neural network model that is utilized when the top 10 requested input fields are submitted and the other being a dynamic nerual network model that builds itself from a set of fields designated by the user.
 
-##### Here's why Credit Crunch by West End Financial is important:
+## Here's why Credit Crunch by West End Financial is important:
 * It can lower your risk of financial credit lines given to your customers
 * It can pre-approve your customers for a credit line
 * It can enable cross-selling of other financial products such as savings and checking accounts
 * It can reduce overhead and responsabilities of your Credit Loan Officers
 
+</br>
 
-### Building for Heroku
-Heroku requires a `requirements.txt` in the root directory and Continuous Deployment is not configured for this repository. Thus, a manual dump of dependencies is required via executing `poetry export -f requirements.txt -o requirements.txt --without-hashes` prior to deploying on Heroku.
+## Deployment:
+Current deployments utilize Azure Container Apps. The following deployment must be performed on the host machine and not in the development container, since docker is not installed / reachable inside the container.
+1. Log into Azure CLI and ensure you are on the proper subcription using the following commands:
+```
+#!/bin/bash
+az login
+az account set -s <my-subscription>
+az account show
+```
+
+</br>
+
+2. Run the deployment ci script using the desired arguments, below is an example deploying fully to Azure:
+```
+#!/bin/bash
+./ci/deploy-containerapp.sh -n westendfinancial -r acrwestendfinancial -acr
+```
+
+This deploys the following resources into a single resource group:
+- Azure Resource Group
+- Azure Container Registry (If `-acr` flag specified)
+- Azure Log Analytics Workspace
+- Container App Environment
+- Container App
+
+> Note: you can use Docker as a container registry as well.
+
+</br>
+
+3. To update the Container App, run the update ci script:
+```
+#!/bin/bash
+./ci/update-containerapp.sh -n westendfinancial -r acrwestendfinancial -acr
+```
+
+</br>
+
+## Development:
+Development of this application relies on VS Code's Remote Containers.
+
+Ensure the following tools are installed on your local machine:
+- VS Code
+    - Remote Development (VS Code Extension)
+    - Docker (VS Code Extension)
+- Docker Engine
+
+To start Developing:
+1. Clone the repository to your machine.
+```
+#!/bin/bash
+git clone https://github.com/armckinney/west-end-financial.git
+```
+
+2. Open the repository in VS Code:
+```
+#!/bin/bash
+code ./west-end-financial
+```
+
+3. Open the project within the development container:
+    - Open the VS Code command palette:`ctrl+shift+p`
+    - Execute the command: `Remote Development: Reopen in Container`
+
+After the dev container builds, you should be set up with the proper dev environment and ready to get started! 
