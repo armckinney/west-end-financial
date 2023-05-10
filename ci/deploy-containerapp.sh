@@ -125,7 +125,7 @@ then
     --resource-group $resourceGroup \
     --environment $containerAppEnv \
     --image $imageName \
-    --target-port 3500 \
+    --target-port 8008 \
     --ingress 'external' \
     --registry-server $registryServer \
     --registry-identity 'system' \
@@ -138,7 +138,7 @@ else
     --resource-group $resourceGroup \
     --environment $containerAppEnv \
     --image $imageName \
-    --target-port 3500 \
+    --target-port 8008 \
     --ingress 'external' \
     --registry-server $registryServer \
     --registry-username $CONTAINER_REGISTRY_USERNAME \
