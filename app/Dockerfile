@@ -1,4 +1,4 @@
-FROM armck/python-base:latest
+FROM armck/python-base:2.0
 
 LABEL   deployable="true" \
         decription="This is the deployable version of the WEF application container. \
@@ -20,4 +20,4 @@ RUN cd $WORKDIR/ && poetry install --no-root --without=dev
 
 # ----- Container Command -----
 # exec commands do not run in shell by default (See: https://docs.docker.com/engine/reference/builder/#cmd)
-CMD ["/bin/bash", "-c", "poetry run uvicorn app.main:app --host 0.0.0.0 --port 3500"]
+CMD ["/bin/bash", "-c", "poetry run uvicorn app.main:app --host 0.0.0.0 --port 8008"]

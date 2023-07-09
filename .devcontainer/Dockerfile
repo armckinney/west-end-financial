@@ -1,4 +1,4 @@
-FROM armck/python-base:latest
+FROM armck/python-base:2.0
 
 LABEL   deployable="false" \
         decription="This is the development version of the WEF application container. \
@@ -16,14 +16,36 @@ ENV DEBIAN_FRONTEND=noninteractive
 # ----- Primary Installs -----
 # uses tmp install directory to keep from caching install downloads
 
-RUN mkdir /tmp/dockerinstall \
-    && cd /tmp/dockerinstall \
+RUN mkdir /tmp/dockerinstall && cd /tmp/dockerinstall \
     # Installs
-    # Azure CLI
+    # Supporting Packages
+    && apt-get update && apt-get -y install  \
+        ca-certificates \
+        curl \
+        gnupg \
+        software-properties-common \
+        wget \
+    # Azure CLI Keys and Registry
     && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main"  > /etc/apt/sources.list.d/azure-cli.list \
+    # Terraform Keys & Registry
+    && wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list \
+    # Docker Keys & Registry - For Terraform ContainerApp Deployments
+    && install -m 0755 -d /etc/apt/keyrings \
+    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
+    && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    # Primary Installs
     && apt-get update && apt-get -y install \
         azure-cli \
+        terraform \
+        docker-ce \
+        docker-ce-cli \
+        containerd.io \
+        docker-buildx-plugin \
+        docker-compose-plugin \
+    # Azure CLI Configuration
     && az extension add --name containerapp --upgrade \
     # Clean up
     && apt-get autoremove -y \

@@ -3,6 +3,10 @@
 *key*
 *local*
 
+# terraform
+*tfstate*
+*.terraform*
+
 # logs
 *.log
 *.db
