@@ -29,8 +29,6 @@
     </p>
     <p>
     <!-- Links -->
-        <a href="https://ca-westendfinancial-prod.ashymoss-cd1cd23a.eastus.azurecontainerapps.io" target="_blank">View Demo</a>
-        ·
         <a href="https://github.com/armckinney/west-end-financial/issues/new/choose">Report Bug</a>
         ·
         <a href="https://github.com/armckinney/west-end-financial/issues/new/choose">Request Feature</a>
@@ -49,43 +47,6 @@ The app utilizes various methods analysis, involves 2 key determination methods.
 * It can pre-approve your customers for a credit line
 * It can enable cross-selling of other financial products such as savings and checking accounts
 * It can reduce overhead and responsabilities of your Credit Loan Officers
-
-</br>
-
-## Deployment:
-Current deployments utilize Azure Container Apps. The following deployment must be performed on the host machine and not in the development container, since docker is not installed / reachable inside the container.
-1. Log into Azure CLI and ensure you are on the proper subcription using the following commands:
-```
-#!/bin/bash
-az login
-az account set -s <my-subscription>
-az account show
-```
-
-</br>
-
-2. Run the deployment ci script using the desired arguments, below is an example deploying fully to Azure:
-```
-#!/bin/bash
-./ci/deploy-containerapp.sh -n westendfinancial -r acrwestendfinancial -acr
-```
-
-This deploys the following resources into a single resource group:
-- Azure Resource Group
-- Azure Container Registry (If `-acr` flag specified)
-- Azure Log Analytics Workspace
-- Container App Environment
-- Container App
-
-> Note: you can use Docker as a container registry as well.
-
-</br>
-
-3. To update the Container App, run the update ci script:
-```
-#!/bin/bash
-./ci/update-containerapp.sh -n westendfinancial -r acrwestendfinancial -acr
-```
 
 </br>
 
