@@ -27,7 +27,7 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 
-# Use mounted docker service in container from host machine
+# use mounted docker service in container from host machine
 provider "docker" {
   host = "unix:///var/run/docker.sock"
 }
