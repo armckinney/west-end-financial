@@ -1,6 +1,6 @@
 # Scope: Provides DockerHub build & push (with cache), as well as empty linting and testing jobs 
 
-name: CI
+name: wf-ci
 
 on:
   push:
