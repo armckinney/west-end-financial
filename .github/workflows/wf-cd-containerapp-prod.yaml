@@ -53,19 +53,12 @@ jobs:
     secrets:
       DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-  static-analysis:
-    needs: [dev-container-build-and-push, setup-env]
-    uses: armckinney/cicd/.github/workflows/rwf-terraform-static-analysis.yaml@main
-    with:
-      container_image: ${{ needs.dev-container-build-and-push.outputs.container_image }}
-      configuration: ${{ needs.setup-env.outputs.configuration }}
-      environment: ${{ needs.setup-env.outputs.environment }}
-
   terraform-deployment-ci:
     needs: [setup-env, dev-container-build-and-push, app-container-build-and-push, static-analysis]
     uses: armckinney/cicd/.github/workflows/rwf-terraform-deployment-ci.yaml@main
     with:
-      container_image: ${{ needs.dev-container-build-and-push.outputs.container_image }}
+      # using standard container image for deployment as opposed to devcontainer
+      container_image: armck/terraform-azure:2.73.0
       configuration: ${{ needs.setup-env.outputs.configuration }}
       environment: ${{ needs.setup-env.outputs.environment }}
     secrets:
