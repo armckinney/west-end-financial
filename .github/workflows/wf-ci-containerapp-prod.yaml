@@ -8,7 +8,7 @@ env:
   APP_IMAGE_TAG: 'app-latest'
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
 
 defaults:
@@ -61,9 +61,9 @@ jobs:
       configuration: ${{ needs.setup-env.outputs.configuration }}
       environment: ${{ needs.setup-env.outputs.environment }}
 
-  terraform-deployment-ci:
+  terraform-plan:
     needs: [setup-env, dev-container-build-and-push, app-container-build-and-push, static-analysis]
-    uses: armckinney/cicd/.github/workflows/rwf-terraform-deployment-ci.yaml@main
+    uses: armckinney/cicd/.github/workflows/rwf-terraform-plan.yaml@main
     with:
       container_image: ${{ needs.dev-container-build-and-push.outputs.container_image }}
       configuration: ${{ needs.setup-env.outputs.configuration }}
