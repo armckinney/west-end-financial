@@ -54,7 +54,7 @@ jobs:
       DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
   terraform-deployment-ci:
-    needs: [setup-env, dev-container-build-and-push, app-container-build-and-push, static-analysis]
+    needs: [setup-env, dev-container-build-and-push, app-container-build-and-push]
     uses: armckinney/cicd/.github/workflows/rwf-terraform-deployment-ci.yaml@main
     with:
       # using standard container image for deployment as opposed to devcontainer
