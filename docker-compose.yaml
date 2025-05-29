@@ -8,3 +8,9 @@ services:
       - .:/workspaces/west-end-financial:cached
       - ~/.azure:/root/.azure:rw
     command: /bin/sh -c "while sleep 1000; do :; done"
+  terraform-container:
+    image: armck/terraform-azure:2.73.0
+    volumes:
+      - .:/workspaces/west-end-financial:cached
+      - ~/.azure:/root/.azure:rw
+    command: /bin/sh -c "while sleep 1000; do :; done"
