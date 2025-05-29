@@ -1,7 +1,7 @@
 {
 	"name": "west-end-financial",
 	"dockerComposeFile": [
-		"../docker-compose.yml"
+		"../docker-compose.yaml"
 	],
 	"service": "dev-container",
 	"workspaceFolder": "/workspaces/west-end-financial",
@@ -21,7 +21,7 @@
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"hashicorp.terraform",
-				"shd101wyy.markdown-preview-enhanced",
+				"yzhang.markdown-all-in-one",
 				"janisdd.vscode-edit-csv"
 			]
 		}
