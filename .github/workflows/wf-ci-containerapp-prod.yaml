@@ -9,7 +9,7 @@ env:
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 defaults:
   run:
