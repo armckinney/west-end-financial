@@ -1,8 +1,7 @@
 FROM armck/python:3.9.5
 
-LABEL   deployable="false" \
-        decription="This is the development version of the WEF application container. \
-                    It includes the application and required development tools."
+ARG AZURE_CLI_VERSION=2.73.0
+ARG TERRAFORM_VERSION=1.10.5
 
 # set workspace directory
 ARG WORKSPACE=/workspaces/west-end-financial
@@ -22,21 +21,15 @@ RUN mkdir /tmp/container \
         gnupg \
         software-properties-common \
     # azure cli keys and registry
-    && curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg \
+    && wget -O- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/microsoft.gpg \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/azure-cli.list \
     # terraform keys & registry
     && curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/hashicorp.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list \
-    # docker keys & registry - for terraform containerapp deployments
-    && install -m 0755 -d /etc/apt/keyrings \
-    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
-    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list \
     # primary installs
     && apt update && apt -y install \
-        azure-cli \
-        terraform \
-        docker-ce-cli \
+        azure-cli=${AZURE_CLI_VERSION}-1~$(lsb_release -cs) \
+        terraform=${TERRAFORM_VERSION}-1 \
     # azure cli configuration
     && az extension add --name containerapp --upgrade \
     # cleanup

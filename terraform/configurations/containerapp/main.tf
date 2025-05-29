@@ -8,7 +8,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.55.0"
+      version = "4.30.0"
     }
     docker = {
       source  = "kreuzwerker/docker"
@@ -23,11 +23,4 @@ provider "azurerm" {
       prevent_deletion_if_contains_resources = false
     }
   }
-  tenant_id       = var.tenant_id
-  subscription_id = var.subscription_id
-}
-
-# use mounted docker service in container from host machine
-provider "docker" {
-  host = "unix:///var/run/docker.sock"
 }

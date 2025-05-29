@@ -1,0 +1,5 @@
+application        = "westendfinancial"
+environment        = "prod"
+container_registry = "docker.io"
+container_name     = "armck/west-end-financial"
+image_tag          = "app-latest"

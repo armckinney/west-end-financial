@@ -6,6 +6,5 @@ services:
       context: ./
     volumes:
       - .:/workspaces/west-end-financial:cached
-      - ~/.docker/config.json:/root/.docker/config.json:ro
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.azure:/root/.azure:rw
     command: /bin/sh -c "while sleep 1000; do :; done"
