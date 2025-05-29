@@ -1,4 +1,4 @@
-name: wf-terraform-ci-containerapp-prod
+name: wf-ci-containerapp-prod
 
 env:
   DOCKERHUB_ID: 'armck'
