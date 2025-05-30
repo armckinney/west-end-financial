@@ -24,6 +24,7 @@ No modules.
 | [azurerm_container_app_environment.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.30.0/docs/resources/container_app_environment) | resource |
 | [azurerm_log_analytics_workspace.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.30.0/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.30.0/docs/resources/resource_group) | resource |
+| [azurerm_user_assigned_identity.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.30.0/docs/resources/user_assigned_identity) | resource |
 
 ## Inputs
 

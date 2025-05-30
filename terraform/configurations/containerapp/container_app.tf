@@ -15,7 +15,7 @@ resource "azurerm_container_app" "this" {
 
   identity {
     type         = "UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.container_app.id]
+    identity_ids = [azurerm_user_assigned_identity.this.id]
   }
 
   ingress {
