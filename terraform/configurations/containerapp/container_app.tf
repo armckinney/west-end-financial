@@ -13,6 +13,11 @@ resource "azurerm_container_app" "this" {
   revision_mode                = "Single"
   tags                         = local.tags
 
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.container_app.id]
+  }
+
   ingress {
     external_enabled = true
     target_port      = 8008
@@ -23,7 +28,8 @@ resource "azurerm_container_app" "this" {
   }
 
   registry {
-    server = var.container_registry
+    server   = var.container_registry
+    identity = azurerm_user_assigned_identity.this.id
   }
 
   template {
