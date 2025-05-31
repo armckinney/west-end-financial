@@ -3,8 +3,9 @@
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_acme"></a> [acme](#requirement\_acme) | 2.32.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.30.0 |
-| <a name="requirement_docker"></a> [docker](#requirement\_docker) | 3.0.2 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.1.0 |
 
 ## Providers
 
@@ -14,7 +15,10 @@
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_containerapp_custom_domain"></a> [containerapp\_custom\_domain](#module\_containerapp\_custom\_domain) | ../../modules/containerapp_custom_domain | n/a |
+| <a name="module_containerapp_environment_certificate"></a> [containerapp\_environment\_certificate](#module\_containerapp\_environment\_certificate) | ../../modules/containerapp_environment_certificate | n/a |
 
 ## Resources
 
@@ -24,16 +28,16 @@ No modules.
 | [azurerm_container_app_environment.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.30.0/docs/resources/container_app_environment) | resource |
 | [azurerm_log_analytics_workspace.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.30.0/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.30.0/docs/resources/resource_group) | resource |
+| [azurerm_dns_zone.this](https://registry.terraform.io/providers/hashicorp/azurerm/4.30.0/docs/data-sources/dns_zone) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_application"></a> [application](#input\_application) | Name of the application to deploy | `string` | n/a | yes |
-| <a name="input_container_name"></a> [container\_name](#input\_container\_name) | Name of the container to deploy | `string` | `"armck/hello-world"` | no |
-| <a name="input_container_registry"></a> [container\_registry](#input\_container\_registry) | Optional: Container registry to push the application image to; default creates a new ACR | `string` | `"docker.io"` | no |
+| <a name="input_container_image"></a> [container\_image](#input\_container\_image) | Container image to deploy in the container app | `string` | `"docker.io/hello-world:latest"` | no |
+| <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | DNS Zone object containing the name and resource group for the DNS zone | <pre>object({<br>    name        = string<br>    application = string<br>    environment = string<br>  })</pre> | `null` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Deployment Environment Name | `string` | n/a | yes |
-| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Tag of the container image to deploy | `string` | `"latest"` | no |
 
 ## Outputs
 

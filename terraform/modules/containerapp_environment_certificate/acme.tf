@@ -35,7 +35,7 @@ resource "acme_certificate" "this" {
   dns_challenge {
     provider = "azure"
     config = {
-      AZURE_ZONE_NAME      = var.dnz_zone.name
+      AZURE_ZONE_NAME      = var.dns_zone.name
       AZURE_RESOURCE_GROUP = var.dns_zone.resource_group_name
     }
   }
