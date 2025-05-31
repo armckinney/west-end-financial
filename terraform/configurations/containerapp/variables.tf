@@ -8,20 +8,18 @@ variable "environment" {
   type        = string
 }
 
-variable "container_registry" {
-  description = "Optional: Container registry to push the application image to; default creates a new ACR"
+variable "container_image" {
+  description = "Container image to deploy in the container app"
   type        = string
-  default     = "docker.io"
+  default     = "docker.io/hello-world:latest"
 }
 
-variable "container_name" {
-  description = "Name of the container to deploy"
-  type        = string
-  default     = "armck/hello-world"
-}
-
-variable "image_tag" {
-  description = "Tag of the container image to deploy"
-  type        = string
-  default     = "latest"
+variable "dns_zone" {
+  description = "DNS Zone object containing the name and resource group for the DNS zone"
+  type = object({
+    name        = string
+    application = string
+    environment = string
+  })
+  default = null
 }

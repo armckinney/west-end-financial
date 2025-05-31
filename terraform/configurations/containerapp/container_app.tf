@@ -25,7 +25,7 @@ resource "azurerm_container_app" "this" {
   template {
     container {
       name   = join("-", ["cntr", var.application, var.environment])
-      image  = "${var.container_registry}/${var.container_name}:${var.image_tag}"
+      image  = var.container_image
       cpu    = 0.5
       memory = "1Gi"
     }
