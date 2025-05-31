@@ -1,4 +1,4 @@
-name: wf-terraform-destroy
+name: wf-destroy-containerapp-prod
 
 env:
   CONFIGURATION: 'containerapp'
