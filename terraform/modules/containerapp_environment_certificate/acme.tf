@@ -27,10 +27,24 @@ resource "acme_registration" "this" {
   account_key_pem = tls_private_key.this.private_key_pem
 }
 
+resource "time_rotating" "this" {
+  rotation_days = var.time_rotating_days
+}
+
+resource "random_password" "this" {
+  length  = 32
+  special = true
+
+  keepers = {
+    rotation = time_rotating.this.id
+  }
+}
+
 # request the certificate from let's encrypt
 resource "acme_certificate" "this" {
-  account_key_pem         = acme_registration.this.account_key_pem
-  certificate_request_pem = tls_cert_request.this.cert_request_pem
+  account_key_pem          = acme_registration.this.account_key_pem
+  certificate_request_pem  = tls_cert_request.this.cert_request_pem
+  certificate_p12_password = random_password.this.result
 
   dns_challenge {
     provider = "azure"

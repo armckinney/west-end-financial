@@ -33,6 +33,13 @@ variable "dns_zone" {
   })
 }
 
+variable "time_rotating_days" {
+  description = "Number of days to rotate the certificate"
+  type        = number
+  default     = 60
+
+}
+
 variable "tags" {
   description = "Tags to apply to resources"
   type        = map(string)

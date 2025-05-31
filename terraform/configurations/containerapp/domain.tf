@@ -10,6 +10,7 @@ module "containerapp_environment_certificate" {
   dns_zone           = data.azurerm_dns_zone.this
   organization       = local.organization
   organization_email = local.letsencrypt_email
+  time_rotating_days = 59
   tags               = local.tags
 }
 

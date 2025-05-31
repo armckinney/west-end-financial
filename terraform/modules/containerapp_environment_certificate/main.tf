@@ -3,11 +3,17 @@ terraform {
     azurerm = {
       source = "hashicorp/azurerm"
     }
-    acme = {
-      source = "vancluever/acme"
+    time = {
+      source = "hashicorp/time"
+    }
+    random = {
+      source = "hashicorp/random"
     }
     tls = {
       source = "hashicorp/tls"
+    }
+    acme = {
+      source = "vancluever/acme"
     }
   }
 }
