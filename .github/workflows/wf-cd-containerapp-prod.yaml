@@ -34,14 +34,6 @@ jobs:
           echo "app_dockerfile=$APP_DOCKERFILE" >> "$GITHUB_OUTPUT"
           echo "app_image_tag=$APP_IMAGE_TAG" >> "$GITHUB_OUTPUT"
 
-  dev-container-build-and-push:
-    needs: setup-env
-    uses: armckinney/cicd/.github/workflows/rwf-container-build-and-push.yaml@main
-    with:
-      dockerhub_id: ${{ needs.setup-env.outputs.dockerhub_id }}
-    secrets:
-      DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
   app-container-build-and-push:
     needs: setup-env
     uses: armckinney/cicd/.github/workflows/rwf-container-build-and-push.yaml@main
@@ -54,7 +46,7 @@ jobs:
       DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
   terraform-deployment-ci:
-    needs: [setup-env, dev-container-build-and-push, app-container-build-and-push]
+    needs: [setup-env, app-container-build-and-push]
     uses: armckinney/cicd/.github/workflows/rwf-terraform-deployment-ci.yaml@main
     with:
       # using standard container image for deployment as opposed to devcontainer
