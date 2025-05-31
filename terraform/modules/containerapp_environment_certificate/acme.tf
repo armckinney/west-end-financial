@@ -1,14 +1,6 @@
-# ssl certificate configuration using let's encrypt (acme)
-
-# generate a private key for the certificate
-resource "tls_private_key" "this" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
-}
-
 # create a certificate signing request
 resource "tls_cert_request" "this" {
-  private_key_pem = tls_private_key.this.private_key_pem
+  private_key_pem = tls_private_key.certificate.private_key_pem
 
   subject {
     common_name  = "${var.application}.${var.dns_zone.name}"
@@ -24,20 +16,7 @@ resource "tls_cert_request" "this" {
 # acme registration (let's encrypt account)
 resource "acme_registration" "this" {
   email_address   = var.organization_email
-  account_key_pem = tls_private_key.this.private_key_pem
-}
-
-resource "time_rotating" "this" {
-  rotation_days = var.time_rotating_days
-}
-
-resource "random_password" "this" {
-  length  = 32
-  special = true
-
-  keepers = {
-    rotation = time_rotating.this.id
-  }
+  account_key_pem = tls_private_key.account.private_key_pem
 }
 
 # request the certificate from let's encrypt
