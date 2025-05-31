@@ -5,6 +5,8 @@
 |------|---------|
 | <a name="requirement_acme"></a> [acme](#requirement\_acme) | 2.32.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.30.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.7.2 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | 0.13.1 |
 | <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.1.0 |
 
 ## Providers
