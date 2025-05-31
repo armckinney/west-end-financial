@@ -25,6 +25,8 @@ resource "acme_certificate" "this" {
   certificate_request_pem  = tls_cert_request.this.cert_request_pem
   certificate_p12_password = random_password.this.result
 
+  pre_check_delay = 60
+
   dns_challenge {
     provider = "azure"
     config = {
