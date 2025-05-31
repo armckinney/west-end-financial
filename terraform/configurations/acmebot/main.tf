@@ -6,6 +6,7 @@ terraform {
       version = "4.30.0"
     }
   }
+  backend "azurerm" {}
 }
 
 # todo: app role auth & dns config
