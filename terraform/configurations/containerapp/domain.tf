@@ -20,6 +20,6 @@ module "containerapp_custom_domain" {
   application                          = var.application
   containerapp                         = azurerm_container_app.this
   dns_zone                             = data.azurerm_dns_zone.this
-  containerapp_environment_certificate = module.containerapp_environment_certificate.containerapp_environment_certificate
+  containerapp_environment_certificate = module.containerapp_environment_certificate[0].containerapp_environment_certificate
   tags                                 = local.tags
 }
