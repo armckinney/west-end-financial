@@ -1,11 +1,5 @@
 # account private key
-resource "tls_private_key" "account" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
-}
-
-# cert private key
-resource "tls_private_key" "certificate" {
+resource "tls_private_key" "this" {
   algorithm = "RSA"
   rsa_bits  = 2048
 }
