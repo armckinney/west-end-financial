@@ -1,12 +1,15 @@
-name: wf-ci-acmebot-prod
+name: wf-autocd-containerapp-prod
 
 env:
   DOCKERHUB_ID: 'armck'
-  CONFIGURATION: 'acmebot'
+  CONFIGURATION: 'containerapp'
   ENVIRONMENT: 'prod'
+  APP_DOCKERFILE: 'app/Dockerfile'
+  APP_IMAGE_TAG: 'app-latest'
 
-on: 
-  workflow_dispatch:
+on:
+  schedule:
+    - cron: '0 0 1 * *'
 
 defaults:
   run:
@@ -19,6 +22,8 @@ jobs:
         dockerhub_id: ${{ steps.env.outputs.dockerhub_id }}
         configuration: ${{ steps.env.outputs.configuration }}
         environment: ${{ steps.env.outputs.environment }}
+        app_dockerfile: ${{ steps.env.outputs.app_dockerfile }}
+        app_image_tag: ${{ steps.env.outputs.app_image_tag }}
     steps:
       - name: Setup environment variables
         id: env
@@ -26,20 +31,24 @@ jobs:
           echo "dockerhub_id=$DOCKERHUB_ID" >> "$GITHUB_OUTPUT"
           echo "configuration=$CONFIGURATION" >> "$GITHUB_OUTPUT"
           echo "environment=$ENVIRONMENT" >> "$GITHUB_OUTPUT"
+          echo "app_dockerfile=$APP_DOCKERFILE" >> "$GITHUB_OUTPUT"
+          echo "app_image_tag=$APP_IMAGE_TAG" >> "$GITHUB_OUTPUT"
 
-  static-analysis:
+  app-container-build-and-push:
     needs: setup-env
-    uses: armckinney/cicd/.github/workflows/rwf-terraform-static-analysis.yaml@main
+    uses: armckinney/cicd/.github/workflows/rwf-container-build-and-push.yaml@main
     with:
-      container_image: ${{ needs.dev-container-build-and-push.outputs.container_image }}
-      configuration: ${{ needs.setup-env.outputs.configuration }}
-      environment: ${{ needs.setup-env.outputs.environment }}
+      dockerhub_id: ${{ needs.setup-env.outputs.dockerhub_id }}
+      dockerfile: ${{ needs.setup-env.outputs.app_dockerfile }}
+      image_name: ${{ github.event.repository.name }}
+      image_tag: ${{ needs.setup-env.outputs.app_image_tag }}
+    secrets:
+      DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-  terraform-plan:
-    needs: [setup-env, static-analysis]
-    uses: armckinney/cicd/.github/workflows/rwf-terraform-plan.yaml@main
+  terraform-deployment-ci:
+    needs: [setup-env, app-container-build-and-push]
+    uses: armckinney/cicd/.github/workflows/rwf-terraform-auto-apply.yaml@main
     with:
-      # using standard container image for ci as opposed to devcontainer
       container_image: armck/terraform-azure:2.73.0
       configuration: ${{ needs.setup-env.outputs.configuration }}
       environment: ${{ needs.setup-env.outputs.environment }}
