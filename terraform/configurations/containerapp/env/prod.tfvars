@@ -1,6 +1,6 @@
 application     = "westendfinancial"
 environment     = "prod"
-container_image = "docker.io/armck/west-end-financial:app-latest"
+container_image = "ghcr.io/armckinney/west-end-financial:app-latest"
 dns_zone = {
   name        = "armckinney.dev"
   application = "armckinney"
